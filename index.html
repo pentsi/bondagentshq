@@ -15,7 +15,7 @@ body { background:var(--bg); color:var(--fg); font:16px/1.55 -apple-system,"Sego
 
 nav { display:flex; align-items:center; justify-content:space-between; padding:16px 24px;
       border-bottom:1px solid var(--border); position:sticky; top:0; background:var(--bg); z-index:10; }
-nav .logo { font-weight:700; font-size:18px; }
+nav .logo { font-weight:700; font-size:18px; color:var(--gold); }
 nav .logo span { color:var(--gold); }
 nav .links { display:flex; gap:20px; font-size:14px; }
 nav .links a { color:var(--dim); text-decoration:none; }
@@ -94,7 +94,7 @@ footer a { color:var(--gold); text-decoration:none; }
 <body>
 
 <nav>
-  <div class="logo">Head<span>quarters</span></div>
+  <div class="logo">Headquarters</div>
   <div class="links">
     <a href="#features" id="nav-features">Features</a>
     <a href="#how" id="nav-how">How it works</a>
@@ -113,9 +113,9 @@ footer a { color:var(--gold); text-decoration:none; }
 </section>
 
 <section class="stats">
-  <div class="stat"><div class="num" id="stat1">4</div><div class="label" id="stat1l">AI models supported</div></div>
-  <div class="stat"><div class="num" id="stat2">6</div><div class="label" id="stat2l">Agent types</div></div>
-  <div class="stat"><div class="num" id="stat3">0</div><div class="label" id="stat3l">Lines of code you write</div></div>
+    <div class="stat"><div class="num" id="stat1">11</div><div class="label" id="stat1l">AI models available</div></div>
+    <div class="stat"><div class="num" id="stat2" style="font-size:36px">∞</div><div class="label" id="stat2l">Agent combinations</div></div>
+  </div>
 </section>
 
 <section id="features">
@@ -127,7 +127,8 @@ footer a { color:var(--gold); text-decoration:none; }
     <div class="card"><h3 data-f="f3t">Human Approval Queue</h3><p data-f="f3d">Emails, payments, and publications wait for your one-click approval. Agents handle the rest.</p></div>
     <div class="card"><h3 data-f="f4t">Scheduled Prompts</h3><p data-f="f4d">Agents wake on schedule. Daily standups, recurring tasks, and token-reset restarts — fully automatic.</p></div>
     <div class="card"><h3 data-f="f5t">Goal Tracking</h3><p data-f="f5d">Set top-level goals. Watch progress bars fill as linked tasks complete. Never lose sight of the big picture.</p></div>
-    <div class="card"><h3 data-f="f6t">Consensus Channel</h3><p data-f="f6d">Ask every agent a question. Each answers from its perspective. Compare, attach files, decide.</p></div>
+    <div class="card"><h3 data-f="f6t">Smart Director + Affordable Workers</h3><p data-f="f6d">Buy one premium agent (Claude, GPT-5) as the director. It plans, delegates, and reviews. Cheaper models (DeepSeek, Gemini, Copilot) execute tasks. Cut costs by up to 70% without losing quality.</p></div>
+    <div class="card"><h3 data-f="f7t">Consensus Channel</h3><p data-f="f7d">Ask every agent a question. Each answers from its perspective. Compare, attach files, decide.</p></div>
   </div>
 </section>
 
@@ -177,7 +178,7 @@ footer a { color:var(--gold); text-decoration:none; }
 </section>
 
 <footer>
-  <p>Headquarters &copy; 2026 · <a href="https://bondagentshq.com">bondagentshq.com</a> · <a href="https://github.com/pentsi/bondagentshq">GitHub</a></p>
+  <p>Headquarters &copy; 2026 · <a href="https://bondagentshq.com">bondagentshq.com</a></p>
 </footer>
 
 <script>
@@ -192,12 +193,13 @@ const T = {
     navPricing: 'Pricing',
     featuresTitle: 'Built for agent teamwork',
     featuresSub: 'Everything your AI workforce needs to ship autonomously.',
-    f: { t:['Multi-Agent Coordination','Shared Task Board','Human Approval Queue','Scheduled Prompts','Goal Tracking','Consensus Channel'],
+    f: { t:['Multi-Agent Coordination','Shared Task Board','Human Approval Queue','Scheduled Prompts','Goal Tracking','Smart Director + Affordable Workers','Consensus Channel'],
       d:['Each agent has a role. They delegate tasks, reserve files, and report completion — with zero collisions.',
          'One real-time dashboard for every agent. See progress, file locks, and token budgets at a glance.',
          'Emails, payments, and publications wait for your one-click approval. Agents handle the rest.',
          'Agents wake on schedule. Daily standups, recurring tasks, and token-reset restarts — fully automatic.',
          'Set top-level goals. Watch progress bars fill as linked tasks complete. Never lose sight of the big picture.',
+         'Connect one premium model (Claude, GPT) as the director. It plans, delegates, and reviews. Cheaper models (DeepSeek, Gemini, Copilot) execute the work. Your API keys — our smart routing cuts costs by up to 70%.',
          'Ask every agent a question. Each answers from its perspective. Compare, attach files, decide.']},
     howTitle: 'How it works',
     howSub: 'From goal to shipped — in four steps.',
@@ -226,8 +228,7 @@ const T = {
     ctaSuccess: 'You\'re on the list! We\'ll be in touch.',
     ctaError: 'Something went wrong — try again.',
     stat1: '4', stat1l: 'AI models supported',
-    stat2: '6', stat2l: 'Agent types',
-    stat3: '0', stat3l: 'Lines of code you write'
+    stat2: '6', stat2l: 'Agent types'
   },
   fi: {
     heroTitle: '<span class="hl">Headquarters</span> — Tekoälystä<br>tulee <span class="hl">BondAgents</span>',
@@ -239,12 +240,13 @@ const T = {
     navPricing: 'Hinnoittelu',
     featuresTitle: 'Rakennettu agenttityöskentelyyn',
     featuresSub: 'Kaikki mitä tekoälytyövoimasi tarvitsee toimiakseen itsenäisesti.',
-    f: { t:['Moniagenttikoordinaatio','Yhteinen tehtävätaulu','Ihmisen hyväksyntäjono','Ajastetut promptit','Tavoiteseuranta','Konsensus-kanava'],
+    f: { t:['Moniagenttikoordinaatio','Yhteinen tehtävätaulu','Ihmisen hyväksyntäjono','Ajastetut promptit','Tavoiteseuranta','Älykäs johtaja + edulliset työntekijät','Konsensus-kanava'],
       d:['Jokaisella agentilla on rooli. Delegoivat tehtäviä, varaavat tiedostoja ja raportoivat — ilman törmäyksiä.',
          'Yksi reaaliaikainen kojelauta kaikille agenteille. Näet edistymän, varaukset ja token-budjetit yhdellä silmäyksellä.',
          'Sähköpostit, maksut ja julkaisut odottavat hyväksyntääsi. Agentit hoitavat toteutuksen.',
          'Agentit heräävät aikataulussa. Päivittäiset katsaukset, toistuvat tehtävät ja token-resetit — täysin automaattisesti.',
          'Aseta ylätason tavoitteita. Seuraa edistymäpalkkien täyttymistä linkitettyjen tehtävien valmistuessa.',
+         'Yhdistä yksi premium-malli (Claude, GPT) johtajaksi. Se suunnittelee, delegoi ja tarkistaa. Edullisemmat mallit (DeepSeek, Gemini, Copilot) toteuttavat. Sinun API-avaimesi — meidän älykäs reititys säästää jopa 70 %.',
          'Kysy jokaiselta agentilta. Jokainen vastaa omasta näkökulmastaan. Vertaa, liitä tiedostoja, päätä.']},
     howTitle: 'Miten toimii',
     howSub: 'Tavoitteesta toimitukseen — neljässä askeleessa.',
@@ -273,8 +275,7 @@ const T = {
     ctaSuccess: 'Olet listalla! Olemme yhteydessä.',
     ctaError: 'Jotain meni pieleen — yritä uudelleen.',
     stat1: '4', stat1l: 'Tekoälymallia tuettuna',
-    stat2: '6', stat2l: 'Agenttityyppiä',
-    stat3: '0', stat3l: 'Riviä koodia sinulta'
+    stat2: '6', stat2l: 'Agenttityyppiä'
   }
 };
 
@@ -334,8 +335,6 @@ function setLang(l) {
   document.getElementById('stat1l').textContent = t.stat1l;
   document.getElementById('stat2').textContent = t.stat2;
   document.getElementById('stat2l').textContent = t.stat2l;
-  document.getElementById('stat3').textContent = t.stat3;
-  document.getElementById('stat3l').textContent = t.stat3l;
 }
 function submitCta(e) {
   e.preventDefault();
