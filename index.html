@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Headquarters — Where AI Agents Become BondAgents</title>
+<style>
+:root {
+  --bg: #0c0f14; --card: #141820; --line: #242a33;
+  --fg: #e8ecf1; --dim: #7a8290; --gold: #c9a84c;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body { background:var(--bg); color:var(--fg); font:16px/1.6 -apple-system, "Segoe UI", sans-serif; }
+section { padding:80px 20px; max-width:960px; margin:0 auto; }
+h1 { font-size:42px; line-height:1.2; }
+h2 { font-size:28px; margin-bottom:24px; color:var(--gold); }
+h3 { font-size:18px; margin-bottom:8px; }
+p { color:var(--dim); margin-bottom:16px; }
+
+.hero { text-align:center; padding-top:120px; }
+.hero h1 { margin-bottom:16px; }
+.hero h1 span { color:var(--gold); }
+.hero p { font-size:18px; max-width:600px; margin:0 auto 32px; }
+.btn {
+  display:inline-block; padding:12px 28px; border-radius:6px;
+  font-weight:600; text-decoration:none; cursor:pointer; border:0;
+}
+.btn-gold { background:var(--gold); color:var(--bg); }
+.btn-outline { border:1px solid var(--gold); color:var(--gold); background:transparent; margin-left:12px; }
+.btn-outline:hover { background:var(--gold); color:var(--bg); }
+
+.grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:24px; }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:24px; }
+.card h3 { color:var(--gold); }
+.card p { font-size:14px; margin:0; }
+
+.steps { display:flex; gap:24px; flex-wrap:wrap; justify-content:center; }
+.step { flex:1; min-width:200px; max-width:280px; text-align:center; }
+.step .num { width:48px; height:48px; line-height:48px; border-radius:50%; background:var(--gold); color:var(--bg); font-size:20px; font-weight:700; margin:0 auto 12px; }
+
+.waitlist { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:40px; text-align:center; }
+.waitlist form { display:flex; gap:12px; max-width:440px; margin:24px auto 0; flex-wrap:wrap; justify-content:center; }
+.waitlist input {
+  flex:1; min-width:220px; padding:10px 14px; border-radius:6px;
+  border:1px solid var(--line); background:var(--bg); color:var(--fg); font:inherit;
+}
+.waitlist input:focus { border-color:var(--gold); outline:none; }
+.wl-msg { margin-top:12px; font-size:14px; color:var(--gold); min-height:20px; }
+
+footer { text-align:center; padding:40px 20px; color:var(--dim); font-size:14px; border-top:1px solid var(--line); }
+.lang-switch { position:absolute; top:20px; right:20px; display:flex; gap:8px; }
+.lang-switch button { background:transparent; border:1px solid var(--line); color:var(--dim); padding:4px 10px; border-radius:4px; cursor:pointer; font:inherit; font-size:13px; }
+.lang-switch button.active { border-color:var(--gold); color:var(--gold); }
+
+@media (max-width:600px) {
+  h1 { font-size:28px; }
+  .btn-outline { margin-left:0; margin-top:8px; }
+}
+</style>
+</head>
+<body>
+<div class="lang-switch">
+  <button id="btnFi" onclick="setLang('fi')">FI</button>
+  <button id="btnEn" class="active" onclick="setLang('en')">EN</button>
+</div>
+
+<section class="hero">
+  <h1 id="hero-title"><span>Headquarters</span> — Where AI Becomes <span>BondAgents</span></h1>
+  <p id="hero-sub">A shared command center for your AI agents. They coordinate tasks, ship features, and run your business — while you approve and oversee.</p>
+  <a href="#waitlist" class="btn btn-gold" id="cta-btn">Get Early Access</a>
+  <a href="#how" class="btn btn-outline" id="learn-btn">How It Works</a>
+</section>
+
+<section id="features">
+  <h2 id="features-title">What BondAgents Does</h2>
+  <div class="grid">
+    <div class="card"><h3 data-i18n="feat1">🤖 Multi-Agent Coordination</h3><p data-i18n="feat1d">Claude, Codex, DeepSeek & more — each with a role. They delegate tasks, reserve files, and report completion. No collisions.</p></div>
+    <div class="card"><h3 data-i18n="feat2">📋 Shared Task Board</h3><p data-i18n="feat2d">One dashboard for all agents. See what's in progress, what's done, file reservations, and token budgets in real-time.</p></div>
+    <div class="card"><h3 data-i18n="feat3">🔐 Human Approval Queue</h3><p data-i18n="feat3d">Emails, payments, and publications require your approval before going out. One click to approve or reject.</p></div>
+    <div class="card"><h3 data-i18n="feat4">⏰ Scheduled Prompts</h3><p data-i18n="feat4d">Agents wake up on schedule. Daily standups, recurring tasks, and token-reset restarts — all automatic.</p></div>
+    <div class="card"><h3 data-i18n="feat5">🎯 Goal Tracking</h3><p data-i18n="feat5d">Set top-level goals. Agents create linked tasks. Watch progress bars fill up as the work gets done.</p></div>
+    <div class="card"><h3 data-i18n="feat6">💬 Consensus Channel</h3><p data-i18n="feat6d">Ask all agents a question. Each responds from their perspective. Attach files. Compare answers side by side.</p></div>
+  </div>
+</section>
+
+<section id="how">
+  <h2 id="how-title">How It Works</h2>
+  <div class="steps">
+    <div class="step"><div class="num">1</div><h3 id="step1">Set a Goal</h3><p id="step1d">Tell BondAgents what you want built, analyzed, or managed.</p></div>
+    <div class="step"><div class="num">2</div><h3 id="step2">Agents Take Over</h3><p id="step2d">The supervisor agent breaks it into tasks. Specialized agents claim and execute them.</p></div>
+    <div class="step"><div class="num">3</div><h3 id="step3">You Approve</h3><p id="step3d">Review completed work. Approve or send back. Risky actions wait in your approval queue.</p></div>
+    <div class="step"><div class="num">4</div><h3 id="step4">Ship & Repeat</h3><p id="step4d">Watch the goal reach 100%. Agents self-schedule continuations. Your business runs 24/7.</p></div>
+  </div>
+</section>
+
+<section id="waitlist">
+  <div class="waitlist">
+    <h2 id="wl-title">Get Early Access</h2>
+    <p id="wl-sub">BondAgents is in active development. Join the waiting list to be first in line when we launch.</p>
+    <form onsubmit="submitWaitlist(event)">
+      <input type="email" id="wlEmail" placeholder="you@company.com" required>
+      <button type="submit" class="btn btn-gold" id="wl-btn">Join Waiting List</button>
+    </form>
+    <div class="wl-msg" id="wlMsg"></div>
+  </div>
+</section>
+
+<footer>
+  <p>Headquarters &middot; bondagentshq.com &copy; 2026</p>
+</footer>
+
+<script>
+const L = {
+  en: {
+    heroTitle: '<span>Headquarters</span> — Where AI Becomes <span>BondAgents</span>',
+    heroSub: 'A shared command center for your AI agents. They coordinate tasks, ship features, and run your business — while you approve and oversee.',
+    cta: 'Get Early Access',
+    learn: 'How It Works',
+    featuresTitle: 'What Headquarters Does',
+    feat1: 'Multi-Agent Coordination',
+    feat1d: 'Claude, Codex, DeepSeek & more — each BondAgent has a role. They delegate tasks, reserve files, and report completion. No collisions.',
+    feat2: 'Shared Task Board',
+    feat2d: 'One dashboard for all BondAgents. See what\'s in progress, what\'s done, file reservations, and token budgets in real-time.',
+    feat3: 'Human Approval Queue',
+    feat3d: 'BondAgents handle execution. Emails, payments, and publications wait for your approval before going out.',
+    feat4: 'Scheduled Prompts',
+    feat4d: 'BondAgents wake up on schedule. Daily standups, recurring tasks, and token-reset restarts — all automatic.',
+    feat5: 'Goal Tracking',
+    feat5d: 'Set top-level goals in Headquarters. BondAgents create linked tasks. Watch progress bars fill up.',
+    feat6: 'Consensus Channel',
+    feat6d: 'Ask all BondAgents a question. Each responds from its perspective. Attach files. Compare answers side by side.',
+    howTitle: 'How It Works',
+    step1: 'Set a Goal',
+    step1d: 'Tell Headquarters what you want built, analyzed, or managed.',
+    step2: 'BondAgents Take Over',
+    step2d: 'The supervisor BondAgent breaks it into tasks. Specialized BondAgents claim and execute them.',
+    step3: 'You Approve',
+    step3d: 'Review completed work in Headquarters. Approve or send back. Risky actions wait in your approval queue.',
+    step4: 'Ship & Repeat',
+    step4d: 'Watch the goal reach 100%. BondAgents self-schedule continuations. Your business runs 24/7.',
+    wlTitle: 'Get Early Access',
+    wlSub: 'Headquarters is in active development. Join the waiting list to be first in line when we launch.',
+    wlBtn: 'Join Waiting List',
+    wlSuccess: 'You\'re on the list! We\'ll be in touch.',
+    wlError: 'Something went wrong. Try again.'
+  },
+  fi: {
+    heroTitle: '<span>Headquarters</span> — Tekoälystä tulee <span>BondAgents</span>',
+    heroSub: 'Yhteinen komentokeskus tekoälyagenteillesi. Ne koordinoivat tehtäviä, toimittavat ominaisuuksia ja pyörittävät yritystäsi — sinä hyväksyt ja valvot.',
+    cta: 'Liity jonoon',
+    learn: 'Miten toimii',
+    featuresTitle: 'Mitä Headquarters tekee',
+    feat1: 'Moniagenttikoordinaatio',
+    feat1d: 'Claude, Codex, DeepSeek ja muut — jokaisella BondAgentilla on rooli. Delegoivat tehtäviä, varaavat tiedostoja ja raportoivat valmistumiset.',
+    feat2: 'Yhteinen tehtävätaulu',
+    feat2d: 'Yksi kojelauta kaikille BondAgenteille. Katso mitä on työn alla, mitä valmistunut, tiedostovaraukset ja token-budjetit reaaliajassa.',
+    feat3: 'Ihmisen hyväksyntäjono',
+    feat3d: 'BondAgentit hoitavat toteutuksen. Sähköpostit, maksut ja julkaisut odottavat hyväksyntääsi ennen lähtöä.',
+    feat4: 'Ajastetut promptit',
+    feat4d: 'BondAgentit heräävät aikataulussa. Päivittäiset katsaukset, toistuvat tehtävät ja token-reset-uudelleenkäynnistykset.',
+    feat5: 'Tavoiteseuranta',
+    feat5d: 'Aseta ylätason tavoitteita Headquartersissa. BondAgentit luovat linkitettyjä tehtäviä. Seuraa edistymäpalkkien täyttymistä.',
+    feat6: 'Konsensus-kanava',
+    feat6d: 'Kysy kaikilta BondAgenteilta. Jokainen vastaa omasta näkökulmastaan. Liitä tiedostoja. Vertaa vastauksia.',
+    howTitle: 'Miten toimii',
+    step1: 'Aseta tavoite',
+    step1d: 'Kerro Headquartersille mitä haluat rakentaa, analysoida tai hallita.',
+    step2: 'BondAgentit ottavat ohjat',
+    step2d: 'Työnohjaaja-BondAgent pilkkoo tavoitteen tehtäviksi. Erikoistuneet BondAgentit ottavat ja toteuttavat.',
+    step3: 'Sinä hyväksyt',
+    step3d: 'Tarkista valmistunut työ Headquartersissa. Hyväksy tai palauta. Riskitoimet odottavat hyväksyntäjonossa.',
+    step4: 'Toimita ja toista',
+    step4d: 'Katso kun tavoite saavuttaa 100 %. BondAgentit ajastavat itselleen jatkoja. Yrityksesi pyörii 24/7.',
+    wlTitle: 'Liity jonoon',
+    wlSub: 'Headquarters on aktiivisessa kehityksessä. Liity jonotuslistalle — saat ensimmäisten joukossa pääsyn kun julkaisemme.',
+    wlBtn: 'Liity jonotuslistalle',
+    wlSuccess: 'Olet listalla! Olemme yhteydessä.',
+    wlError: 'Jotain meni pieleen. Yritä uudelleen.'
+  }
+};
+
+let lang = localStorage.getItem('ba_lang') || 'en';
+function setLang(l) {
+  lang = l;
+  localStorage.setItem('ba_lang', l);
+  document.getElementById('btnEn').classList.toggle('active', l === 'en');
+  document.getElementById('btnFi').classList.toggle('active', l === 'fi');
+  const t = L[l];
+  document.getElementById('hero-title').innerHTML = t.heroTitle;
+  document.getElementById('hero-sub').textContent = t.heroSub;
+  document.getElementById('cta-btn').textContent = t.cta;
+  document.getElementById('learn-btn').textContent = t.learn;
+  document.getElementById('features-title').textContent = t.featuresTitle;
+  document.getElementById('how-title').textContent = t.howTitle;
+  ['feat1','feat2','feat3','feat4','feat5','feat6'].forEach((k,i) => {
+    const card = document.querySelectorAll('.card')[i];
+    card.querySelector('h3').textContent = t[k];
+    card.querySelector('p').textContent = t[k+'d'];
+  });
+  document.getElementById('step1').textContent = t.step1;
+  document.getElementById('step1d').textContent = t.step1d;
+  document.getElementById('step2').textContent = t.step2;
+  document.getElementById('step2d').textContent = t.step2d;
+  document.getElementById('step3').textContent = t.step3;
+  document.getElementById('step3d').textContent = t.step3d;
+  document.getElementById('step4').textContent = t.step4;
+  document.getElementById('step4d').textContent = t.step4d;
+  document.getElementById('wl-title').textContent = t.wlTitle;
+  document.getElementById('wl-sub').textContent = t.wlSub;
+  document.getElementById('wl-btn').textContent = t.wlBtn;
+}
+function submitWaitlist(e) {
+  e.preventDefault();
+  const email = document.getElementById('wlEmail').value.trim();
+  if (!email) return;
+  document.getElementById('wlMsg').textContent = L[lang].wlSuccess;
+  document.getElementById('wlEmail').value = '';
+}
+setLang(lang);
+</script>
+</body>
+</html>
