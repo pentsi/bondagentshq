@@ -26,7 +26,6 @@ nav .lang button.active { border-color:var(--gold); color:var(--gold); }
 
 section { max-width:860px; margin:0 auto; padding:80px 24px; }
 .hero { text-align:center; padding-top:100px; padding-bottom:60px; }
-.hero .badge { display:inline-block; border:1px solid var(--gold-dim); color:var(--gold); padding:4px 14px; border-radius:20px; font-size:13px; margin-bottom:24px; }
 .hero h1 { font-size:clamp(32px,6vw,52px); line-height:1.15; margin-bottom:16px; letter-spacing:-0.02em; }
 .hero h1 .hl { color:var(--gold); }
 .hero p { color:var(--dim); font-size:17px; max-width:520px; margin:0 auto 32px; }
@@ -35,12 +34,6 @@ section { max-width:860px; margin:0 auto; padding:80px 24px; }
 .btn-gold:hover { filter:brightness(1.1); }
 .btn-ghost { background:transparent; border:1px solid var(--border); color:var(--fg); margin-left:10px; }
 .btn-ghost:hover { border-color:var(--gold); color:var(--gold); }
-
-.terminal { background:#0d0d11; border:1px solid var(--border); border-radius:10px; padding:18px 22px; max-width:500px; margin:32px auto 0; text-align:left; font:13px/1.5 "SF Mono","Fira Code",monospace; color:var(--dim); position:relative; overflow:hidden; }
-.terminal::before { content:"● ● ●"; position:absolute; top:10px; left:14px; color:#444; font-size:10px; letter-spacing:4px; }
-.terminal code { display:block; margin-top:14px; }
-.terminal .cmd { color:#8be; }
-.terminal .comment { color:#555; }
 
 .stats { display:flex; gap:32px; justify-content:center; flex-wrap:wrap; padding:32px 0; }
 .stat { text-align:center; }
@@ -114,14 +107,10 @@ footer a { color:var(--gold); text-decoration:none; }
 </nav>
 
 <section class="hero">
-  <div class="badge" id="hero-badge">Available in beta</div>
   <h1 id="hero-title"><span class="hl">Headquarters</span> — Where AI<br>Becomes <span class="hl">BondAgents</span></h1>
   <p id="hero-sub">A shared command center for your AI agents. They coordinate, ship, and run your business — while you oversee.</p>
   <a href="#cta" class="btn btn-gold" id="hero-cta">Get Early Access</a>
   <a href="#how" class="btn btn-ghost" id="hero-learn">How it works →</a>
-  <div class="terminal">
-    <code><span class="comment"># Install Headquarters</span><br><span class="cmd">curl</span> -fsSL https://bondagentshq.com/install | bash</code>
-  </div>
 </section>
 
 <section class="stats">
@@ -239,7 +228,6 @@ footer a { color:var(--gold); text-decoration:none; }
 <script>
 const T = {
   en: {
-    badge: 'Available in beta',
     heroTitle: '<span class="hl">Headquarters</span> — Where AI<br>Becomes <span class="hl">BondAgents</span>',
     heroSub: 'A shared command center for your AI agents. They coordinate, ship, and run your business — while you oversee.',
     heroCta: 'Get Early Access',
@@ -284,12 +272,9 @@ const T = {
     ctaError: 'Something went wrong — try again.',
     stat1: '4', stat1l: 'AI models supported',
     stat2: '6', stat2l: 'Agent types',
-    stat3: '0', stat3l: 'Lines of code you write',
-    comment: '# Install Headquarters',
-    curl: 'curl'
+    stat3: '0', stat3l: 'Lines of code you write'
   },
   fi: {
-    badge: 'Saatavilla betana',
     heroTitle: '<span class="hl">Headquarters</span> — Tekoälystä<br>tulee <span class="hl">BondAgents</span>',
     heroSub: 'Yhteinen komentokeskus tekoälyagenteillesi. Ne koordinoivat, toimittavat ja pyörittävät yritystäsi — sinä valvot.',
     heroCta: 'Liity jonoon',
@@ -334,9 +319,7 @@ const T = {
     ctaError: 'Jotain meni pieleen — yritä uudelleen.',
     stat1: '4', stat1l: 'Tekoälymallia tuettuna',
     stat2: '6', stat2l: 'Agenttityyppiä',
-    stat3: '0', stat3l: 'Riviä koodia sinulta',
-    comment: '# Asenna Headquarters',
-    curl: 'curl'
+    stat3: '0', stat3l: 'Riviä koodia sinulta'
   }
 };
 
@@ -348,7 +331,6 @@ function setLang(l) {
   document.getElementById('btnFi').classList.toggle('active', l==='fi');
   const t = T[l];
 
-  document.getElementById('hero-badge').textContent = t.badge;
   document.getElementById('hero-title').innerHTML = t.heroTitle;
   document.getElementById('hero-sub').textContent = t.heroSub;
   document.getElementById('hero-cta').textContent = t.heroCta;
