@@ -42,6 +42,13 @@ section { max-width:860px; margin:0 auto; padding:80px 24px; }
 
 h2 { font-size:26px; margin-bottom:12px; letter-spacing:-0.01em; }
 .section-sub { color:var(--dim); font-size:15px; margin-bottom:32px; }
+.shots { display:flex; flex-direction:column; gap:28px; }
+.shots figure { margin:0; }
+.shots img { width:100%; display:block; border:1px solid var(--border); border-radius:12px;
+             box-shadow:0 14px 50px rgba(0,0,0,.55); background:var(--bg); }
+.shots figcaption { color:var(--dim); font-size:13px; margin-top:10px; text-align:center; }
+.shot-tag { display:inline-block; font-size:11px; color:var(--gold); border:1px solid var(--gold-dim);
+            border-radius:10px; padding:2px 10px; margin-bottom:16px; letter-spacing:.5px; }
 
 .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px; }
 .card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:22px; transition:border-color .15s; }
@@ -118,6 +125,22 @@ footer a { color:var(--gold); text-decoration:none; }
   <div class="stat"><div class="num" id="stat3">0</div><div class="label" id="stat3l">Lines of code you write</div></div>
 </section>
 
+<section id="showcase">
+  <span class="shot-tag" id="showcase-tag">PREVIEW</span>
+  <h2 id="showcase-title">See Headquarters in action</h2>
+  <p class="section-sub" id="showcase-sub">A command center for your AI workforce. Staged preview of the live dashboard.</p>
+  <div class="shots">
+    <figure>
+      <img src="assets/screenshot-dashboard.svg" alt="Headquarters dashboard: conversation, tasks, goals, token budget" loading="lazy" width="1200" height="720">
+      <figcaption id="shot1cap">Live dashboard — agents, tasks, goals and token budgets at a glance.</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/screenshot-control.svg" alt="Approval queue, metrics and schedules" loading="lazy" width="1200" height="560">
+      <figcaption id="shot2cap">Human approval queue — risky actions wait for your one click.</figcaption>
+    </figure>
+  </div>
+</section>
+
 <section id="features">
   <h2 id="features-title">Built for agent teamwork</h2>
   <p class="section-sub" id="features-sub">Everything your AI workforce needs to ship autonomously.</p>
@@ -190,6 +213,11 @@ const T = {
     navFeatures: 'Features',
     navHow: 'How it works',
     navPricing: 'Pricing',
+    showcaseTag: 'PREVIEW',
+    showcaseTitle: 'See Headquarters in action',
+    showcaseSub: 'A command center for your AI workforce. Staged preview of the live dashboard.',
+    shot1cap: 'Live dashboard — agents, tasks, goals and token budgets at a glance.',
+    shot2cap: 'Human approval queue — risky actions wait for your one click.',
     featuresTitle: 'Built for agent teamwork',
     featuresSub: 'Everything your AI workforce needs to ship autonomously.',
     f: { t:['Multi-Agent Coordination','Shared Task Board','Human Approval Queue','Scheduled Prompts','Goal Tracking','Consensus Channel'],
@@ -237,6 +265,11 @@ const T = {
     navFeatures: 'Ominaisuudet',
     navHow: 'Miten toimii',
     navPricing: 'Hinnoittelu',
+    showcaseTag: 'ESIKATSELU',
+    showcaseTitle: 'Näin Headquarters toimii',
+    showcaseSub: 'Ohjauskeskus tekoälytyövoimallesi. Lavastettu esikatselu live-näkymästä.',
+    shot1cap: 'Live-näkymä — agentit, tehtävät, tavoitteet ja token-budjetit yhdellä silmäyksellä.',
+    shot2cap: 'Ihmisen hyväksyntäjono — riskialttiit toimet odottavat yhtä klikkaustasi.',
     featuresTitle: 'Rakennettu agenttityöskentelyyn',
     featuresSub: 'Kaikki mitä tekoälytyövoimasi tarvitsee toimiakseen itsenäisesti.',
     f: { t:['Moniagenttikoordinaatio','Yhteinen tehtävätaulu','Ihmisen hyväksyntäjono','Ajastetut promptit','Tavoiteseuranta','Konsensus-kanava'],
@@ -293,6 +326,11 @@ function setLang(l) {
   document.getElementById('nav-features').textContent = t.navFeatures;
   document.getElementById('nav-how').textContent = t.navHow;
   document.getElementById('nav-pricing').textContent = t.navPricing;
+  document.getElementById('showcase-tag').textContent = t.showcaseTag;
+  document.getElementById('showcase-title').textContent = t.showcaseTitle;
+  document.getElementById('showcase-sub').textContent = t.showcaseSub;
+  document.getElementById('shot1cap').textContent = t.shot1cap;
+  document.getElementById('shot2cap').textContent = t.shot2cap;
   document.getElementById('features-title').textContent = t.featuresTitle;
   document.getElementById('features-sub').textContent = t.featuresSub;
   document.querySelectorAll('[data-f^="f"]').forEach(el => {
