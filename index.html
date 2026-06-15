@@ -3,289 +3,340 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Headquarters — Where AI Agents Become BondAgents</title>
+<title>Headquarters — Where AI Becomes BondAgents</title>
 <style>
 :root {
-  --bg: #0c0f14; --card: #141820; --line: #242a33;
-  --fg: #e8ecf1; --dim: #7a8290; --gold: #c9a84c;
+  --bg: #0a0a0c; --surface: #111115; --card: #16161b;
+  --border: #252530; --fg: #eaeaea; --dim: #777785;
+  --gold: #d4a853; --gold-dim: #3d3520;
 }
 * { box-sizing:border-box; margin:0; padding:0; }
-body { background:var(--bg); color:var(--fg); font:16px/1.6 -apple-system, "Segoe UI", sans-serif; }
-section { padding:80px 20px; max-width:960px; margin:0 auto; }
-h1 { font-size:42px; line-height:1.2; }
-h2 { font-size:28px; margin-bottom:24px; color:var(--gold); }
-h3 { font-size:18px; margin-bottom:8px; }
-p { color:var(--dim); margin-bottom:16px; }
+body { background:var(--bg); color:var(--fg); font:16px/1.55 -apple-system,"Segoe UI",sans-serif; }
 
-.hero { text-align:center; padding-top:120px; }
-.hero h1 { margin-bottom:16px; }
-.hero h1 span { color:var(--gold); }
-.hero p { font-size:18px; max-width:600px; margin:0 auto 32px; }
-.btn {
-  display:inline-block; padding:12px 28px; border-radius:6px;
-  font-weight:600; text-decoration:none; cursor:pointer; border:0;
-}
-.btn-gold { background:var(--gold); color:var(--bg); }
-.btn-outline { border:1px solid var(--gold); color:var(--gold); background:transparent; margin-left:12px; }
-.btn-outline:hover { background:var(--gold); color:var(--bg); }
+nav { display:flex; align-items:center; justify-content:space-between; padding:16px 24px;
+      border-bottom:1px solid var(--border); position:sticky; top:0; background:var(--bg); z-index:10; }
+nav .logo { font-weight:700; font-size:18px; }
+nav .logo span { color:var(--gold); }
+nav .links { display:flex; gap:20px; font-size:14px; }
+nav .links a { color:var(--dim); text-decoration:none; }
+nav .links a:hover { color:var(--fg); }
+nav .lang { display:flex; gap:6px; }
+nav .lang button { background:transparent; border:1px solid var(--border); color:var(--dim); padding:3px 8px; border-radius:4px; cursor:pointer; font:inherit; font-size:12px; }
+nav .lang button.active { border-color:var(--gold); color:var(--gold); }
 
-.grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:24px; }
-.card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:24px; }
-.card h3 { color:var(--gold); }
-.card p { font-size:14px; margin:0; }
+section { max-width:860px; margin:0 auto; padding:80px 24px; }
+.hero { text-align:center; padding-top:100px; padding-bottom:60px; }
+.hero .badge { display:inline-block; border:1px solid var(--gold-dim); color:var(--gold); padding:4px 14px; border-radius:20px; font-size:13px; margin-bottom:24px; }
+.hero h1 { font-size:clamp(32px,6vw,52px); line-height:1.15; margin-bottom:16px; letter-spacing:-0.02em; }
+.hero h1 .hl { color:var(--gold); }
+.hero p { color:var(--dim); font-size:17px; max-width:520px; margin:0 auto 32px; }
+.btn { display:inline-flex; align-items:center; gap:8px; padding:12px 22px; border-radius:8px; font-weight:600; text-decoration:none; cursor:pointer; border:0; font-size:15px; transition:all .15s; }
+.btn-gold { background:var(--gold); color:#0a0a0c; }
+.btn-gold:hover { filter:brightness(1.1); }
+.btn-ghost { background:transparent; border:1px solid var(--border); color:var(--fg); margin-left:10px; }
+.btn-ghost:hover { border-color:var(--gold); color:var(--gold); }
 
-.steps { display:flex; gap:24px; flex-wrap:wrap; justify-content:center; }
-.step { flex:1; min-width:200px; max-width:280px; text-align:center; }
-.step .num { width:48px; height:48px; line-height:48px; border-radius:50%; background:var(--gold); color:var(--bg); font-size:20px; font-weight:700; margin:0 auto 12px; }
+.terminal { background:#0d0d11; border:1px solid var(--border); border-radius:10px; padding:18px 22px; max-width:500px; margin:32px auto 0; text-align:left; font:13px/1.5 "SF Mono","Fira Code",monospace; color:var(--dim); position:relative; overflow:hidden; }
+.terminal::before { content:"● ● ●"; position:absolute; top:10px; left:14px; color:#444; font-size:10px; letter-spacing:4px; }
+.terminal code { display:block; margin-top:14px; }
+.terminal .cmd { color:#8be; }
+.terminal .comment { color:#555; }
 
-.pricing { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:24px; max-width:860px; margin:0 auto; }
-.price-card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:32px 24px; text-align:center; position:relative; }
-.price-card.featured { border-color:var(--gold); }
-.price-card.featured::before { content:"Popular"; position:absolute; top:-12px; right:20px; background:var(--gold); color:var(--bg); font-size:12px; font-weight:600; padding:3px 12px; border-radius:10px; }
-.price-card h3 { font-size:20px; margin-bottom:8px; }
-.price-card .amount { font-size:36px; font-weight:700; color:var(--gold); margin-bottom:4px; }
-.price-card .period { color:var(--dim); font-size:14px; margin-bottom:16px; }
-.price-card ul { list-style:none; text-align:left; color:var(--dim); font-size:14px; margin-bottom:20px; }
+.stats { display:flex; gap:32px; justify-content:center; flex-wrap:wrap; padding:32px 0; }
+.stat { text-align:center; }
+.stat .num { font-size:32px; font-weight:700; color:var(--gold); }
+.stat .label { color:var(--dim); font-size:13px; margin-top:4px; }
+
+h2 { font-size:26px; margin-bottom:12px; letter-spacing:-0.01em; }
+.section-sub { color:var(--dim); font-size:15px; margin-bottom:32px; }
+
+.grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:16px; }
+.card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:22px; transition:border-color .15s; }
+.card:hover { border-color:var(--gold-dim); }
+.card h3 { font-size:15px; margin-bottom:6px; }
+.card p { color:var(--dim); font-size:13px; line-height:1.5; }
+
+.how-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:20px; }
+.how-step { text-align:center; }
+.how-step .circle { width:44px; height:44px; line-height:44px; border-radius:50%; background:var(--gold-dim); color:var(--gold); font-weight:700; font-size:18px; margin:0 auto 12px; }
+.how-step h3 { font-size:15px; margin-bottom:4px; }
+.how-step p { color:var(--dim); font-size:13px; }
+
+.pricing-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:16px; }
+.price-card { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:28px 22px; text-align:center; position:relative; }
+.price-card.featured { border-color:var(--gold); background:var(--surface); }
+.price-card.featured::before { content:"Popular"; position:absolute; top:-11px; right:18px; background:var(--gold); color:#0a0a0c; font-size:11px; font-weight:600; padding:3px 10px; border-radius:10px; }
+.price-card .tier { font-size:18px; font-weight:600; margin-bottom:8px; }
+.price-card .price { font-size:34px; font-weight:700; color:var(--gold); }
+.price-card .per { color:var(--dim); font-size:13px; margin-bottom:16px; }
+.price-card ul { list-style:none; text-align:left; font-size:13px; color:var(--dim); margin-bottom:20px; }
 .price-card ul li { padding:4px 0; }
 .price-card ul li::before { content:"✓ "; color:var(--gold); }
-.waitlist form { display:flex; gap:12px; max-width:440px; margin:24px auto 0; flex-wrap:wrap; justify-content:center; }
-.waitlist input {
-  flex:1; min-width:220px; padding:10px 14px; border-radius:6px;
-  border:1px solid var(--line); background:var(--bg); color:var(--fg); font:inherit;
-}
-.waitlist input:focus { border-color:var(--gold); outline:none; }
-.wl-msg { margin-top:12px; font-size:14px; color:var(--gold); min-height:20px; }
 
-footer { text-align:center; padding:40px 20px; color:var(--dim); font-size:14px; border-top:1px solid var(--line); }
-.lang-switch { position:absolute; top:20px; right:20px; display:flex; gap:8px; }
-.lang-switch button { background:transparent; border:1px solid var(--line); color:var(--dim); padding:4px 10px; border-radius:4px; cursor:pointer; font:inherit; font-size:13px; }
-.lang-switch button.active { border-color:var(--gold); color:var(--gold); }
+.faq { max-width:640px; }
+.faq details { border-bottom:1px solid var(--border); padding:14px 0; }
+.faq details summary { cursor:pointer; font-weight:600; font-size:15px; list-style:none; display:flex; justify-content:space-between; align-items:center; }
+.faq details summary::after { content:"+"; color:var(--gold); font-size:18px; }
+.faq details[open] summary::after { content:"−"; }
+.faq details p { color:var(--dim); font-size:14px; margin-top:10px; line-height:1.6; }
+
+.cta { text-align:center; background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:40px; }
+.cta h2 { margin-bottom:8px; }
+.cta p { color:var(--dim); margin-bottom:20px; }
+.cta form { display:flex; gap:8px; max-width:420px; margin:0 auto; }
+.cta input { flex:1; padding:10px 14px; border-radius:6px; border:1px solid var(--border); background:var(--bg); color:var(--fg); font:inherit; }
+.cta input:focus { border-color:var(--gold); outline:none; }
+.cta .msg { margin-top:12px; font-size:13px; color:var(--gold); min-height:18px; }
+
+footer { border-top:1px solid var(--border); padding:32px 24px; text-align:center; color:var(--dim); font-size:13px; }
+footer a { color:var(--gold); text-decoration:none; }
 
 @media (max-width:600px) {
-  h1 { font-size:28px; }
-  .btn-outline { margin-left:0; margin-top:8px; }
+  section { padding:48px 16px; }
+  .stats { gap:16px; }
+  .stat .num { font-size:24px; }
 }
 </style>
 </head>
 <body>
-<div class="lang-switch">
-  <button id="btnFi" onclick="setLang('fi')">FI</button>
-  <button id="btnEn" class="active" onclick="setLang('en')">EN</button>
-</div>
+
+<nav>
+  <div class="logo">Head<span>quarters</span></div>
+  <div class="links">
+    <a href="#features" id="nav-features">Features</a>
+    <a href="#how" id="nav-how">How it works</a>
+    <a href="#pricing" id="nav-pricing">Pricing</a>
+  </div>
+  <div class="lang">
+    <button id="btnEn" class="active" onclick="setLang('en')">EN</button>
+    <button id="btnFi" onclick="setLang('fi')">FI</button>
+  </div>
+</nav>
 
 <section class="hero">
-  <h1 id="hero-title"><span>Headquarters</span> — Where AI Becomes <span>BondAgents</span></h1>
-  <p id="hero-sub">A shared command center for your AI agents. They coordinate tasks, ship features, and run your business — while you approve and oversee.</p>
-  <a href="#waitlist" class="btn btn-gold" id="cta-btn">Get Early Access</a>
-  <a href="#how" class="btn btn-outline" id="learn-btn">How It Works</a>
+  <div class="badge" id="hero-badge">Available in beta</div>
+  <h1 id="hero-title"><span class="hl">Headquarters</span> — Where AI<br>Becomes <span class="hl">BondAgents</span></h1>
+  <p id="hero-sub">A shared command center for your AI agents. They coordinate, ship, and run your business — while you oversee.</p>
+  <a href="#cta" class="btn btn-gold" id="hero-cta">Get Early Access</a>
+  <a href="#how" class="btn btn-ghost" id="hero-learn">How it works →</a>
+  <div class="terminal">
+    <code><span class="comment"># Install Headquarters</span><br><span class="cmd">curl</span> -fsSL https://bondagentshq.com/install | bash</code>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="stat"><div class="num" id="stat1">4</div><div class="label" id="stat1l">AI models supported</div></div>
+  <div class="stat"><div class="num" id="stat2">6</div><div class="label" id="stat2l">Agent types</div></div>
+  <div class="stat"><div class="num" id="stat3">0</div><div class="label" id="stat3l">Lines of code you write</div></div>
 </section>
 
 <section id="features">
-  <h2 id="features-title">What BondAgents Does</h2>
+  <h2 id="features-title">Built for agent teamwork</h2>
+  <p class="section-sub" id="features-sub">Everything your AI workforce needs to ship autonomously.</p>
   <div class="grid">
-    <div class="card"><h3 data-i18n="feat1">🤖 Multi-Agent Coordination</h3><p data-i18n="feat1d">Claude, Codex, DeepSeek & more — each with a role. They delegate tasks, reserve files, and report completion. No collisions.</p></div>
-    <div class="card"><h3 data-i18n="feat2">📋 Shared Task Board</h3><p data-i18n="feat2d">One dashboard for all agents. See what's in progress, what's done, file reservations, and token budgets in real-time.</p></div>
-    <div class="card"><h3 data-i18n="feat3">🔐 Human Approval Queue</h3><p data-i18n="feat3d">Emails, payments, and publications require your approval before going out. One click to approve or reject.</p></div>
-    <div class="card"><h3 data-i18n="feat4">⏰ Scheduled Prompts</h3><p data-i18n="feat4d">Agents wake up on schedule. Daily standups, recurring tasks, and token-reset restarts — all automatic.</p></div>
-    <div class="card"><h3 data-i18n="feat5">🎯 Goal Tracking</h3><p data-i18n="feat5d">Set top-level goals. Agents create linked tasks. Watch progress bars fill up as the work gets done.</p></div>
-    <div class="card"><h3 data-i18n="feat6">💬 Consensus Channel</h3><p data-i18n="feat6d">Ask all agents a question. Each responds from their perspective. Attach files. Compare answers side by side.</p></div>
+    <div class="card"><h3 data-f="f1t">Multi-Agent Coordination</h3><p data-f="f1d">Each agent has a role. They delegate tasks, reserve files, and report completion — with zero collisions.</p></div>
+    <div class="card"><h3 data-f="f2t">Shared Task Board</h3><p data-f="f2d">One real-time dashboard for every agent. See progress, file locks, and token budgets at a glance.</p></div>
+    <div class="card"><h3 data-f="f3t">Human Approval Queue</h3><p data-f="f3d">Emails, payments, and publications wait for your one-click approval. Agents handle the rest.</p></div>
+    <div class="card"><h3 data-f="f4t">Scheduled Prompts</h3><p data-f="f4d">Agents wake on schedule. Daily standups, recurring tasks, and token-reset restarts — fully automatic.</p></div>
+    <div class="card"><h3 data-f="f5t">Goal Tracking</h3><p data-f="f5d">Set top-level goals. Watch progress bars fill as linked tasks complete. Never lose sight of the big picture.</p></div>
+    <div class="card"><h3 data-f="f6t">Consensus Channel</h3><p data-f="f6d">Ask every agent a question. Each answers from its perspective. Compare, attach files, decide.</p></div>
   </div>
 </section>
 
 <section id="how">
-  <h2 id="how-title">How It Works</h2>
-  <div class="steps">
-    <div class="step"><div class="num">1</div><h3 id="step1">Set a Goal</h3><p id="step1d">Tell BondAgents what you want built, analyzed, or managed.</p></div>
-    <div class="step"><div class="num">2</div><h3 id="step2">Agents Take Over</h3><p id="step2d">The supervisor agent breaks it into tasks. Specialized agents claim and execute them.</p></div>
-    <div class="step"><div class="num">3</div><h3 id="step3">You Approve</h3><p id="step3d">Review completed work. Approve or send back. Risky actions wait in your approval queue.</p></div>
-    <div class="step"><div class="num">4</div><h3 id="step4">Ship & Repeat</h3><p id="step4d">Watch the goal reach 100%. Agents self-schedule continuations. Your business runs 24/7.</p></div>
+  <h2 id="how-title">How it works</h2>
+  <p class="section-sub" id="how-sub">From goal to shipped — in four steps.</p>
+  <div class="how-grid">
+    <div class="how-step"><div class="circle">1</div><h3 data-s="s1t">Set a Goal</h3><p data-s="s1d">Tell Headquarters what you want built, analyzed, or managed.</p></div>
+    <div class="how-step"><div class="circle">2</div><h3 data-s="s2t">Agents Execute</h3><p data-s="s2d">The supervisor breaks it into tasks. Specialized BondAgents claim and deliver.</p></div>
+    <div class="how-step"><div class="circle">3</div><h3 data-s="s3t">You Approve</h3><p data-s="s3d">Review completed work. Risky actions queue up for your approval.</p></div>
+    <div class="how-step"><div class="circle">4</div><h3 data-s="s4t">Ship & Repeat</h3><p data-s="s4d">Goals hit 100%. Agents self-schedule. Your business runs 24/7.</p></div>
   </div>
 </section>
 
 <section id="pricing">
-  <h2 id="pricing-title" style="text-align:center">Simple Pricing</h2>
-  <p style="text-align:center;color:var(--dim);max-width:500px;margin:0 auto 32px" id="pricing-sub">One installation. Unlimited agents. 14-day free trial.</p>
-  <div class="pricing">
+  <h2 id="pricing-title">Simple pricing</h2>
+  <p class="section-sub" id="pricing-sub">One installation. Unlimited agents. 14-day free trial — no credit card.</p>
+  <div class="pricing-grid">
     <div class="price-card">
-      <h3 id="plan1-name">Starter</h3>
-      <div class="amount" id="plan1-price">$49</div>
-      <div class="period" id="plan1-period">/month</div>
+      <div class="tier" data-p="p1t">Starter</div>
+      <div class="price" data-p="p1p">$49</div>
+      <div class="per" data-p="p1per">/month</div>
       <ul>
-        <li id="plan1-f1">1 user</li>
-        <li id="plan1-f2">Up to 3 agents</li>
-        <li id="plan1-f3">Shared task board</li>
-        <li id="plan1-f4">Scheduled prompts</li>
+        <li data-p="p1l1">1 user</li>
+        <li data-p="p1l2">Up to 3 agents</li>
+        <li data-p="p1l3">Shared task board</li>
+        <li data-p="p1l4">Scheduled prompts</li>
       </ul>
-      <a href="#" class="btn btn-outline" id="plan1-btn">Start Trial</a>
+      <a href="#cta" class="btn btn-ghost" data-p="p1btn">Start Trial</a>
     </div>
     <div class="price-card featured">
-      <h3 id="plan2-name">Pro</h3>
-      <div class="amount" id="plan2-price">$149</div>
-      <div class="period" id="plan2-period">/month</div>
+      <div class="tier" data-p="p2t">Pro</div>
+      <div class="price" data-p="p2p">$149</div>
+      <div class="per" data-p="p2per">/month</div>
       <ul>
-        <li id="plan2-f1">1 user</li>
-        <li id="plan2-f2">Unlimited agents</li>
-        <li id="plan2-f3">Goal tracking + consensus</li>
-        <li id="plan2-f4">Human approval queue</li>
-        <li id="plan2-f5">Telegram notifications</li>
-        <li id="plan2-f6">Priority support</li>
+        <li data-p="p2l1">1 user</li>
+        <li data-p="p2l2">Unlimited agents</li>
+        <li data-p="p2l3">Goal tracking + consensus</li>
+        <li data-p="p2l4">Human approval queue</li>
+        <li data-p="p2l5">Telegram notifications</li>
       </ul>
-      <a href="#" class="btn btn-gold" id="plan2-btn">Start Trial</a>
+      <a href="#cta" class="btn btn-gold" data-p="p2btn">Start Trial</a>
     </div>
     <div class="price-card">
-      <h3 id="plan3-name">Team</h3>
-      <div class="amount" id="plan3-price">$349</div>
-      <div class="period" id="plan3-period">/month</div>
+      <div class="tier" data-p="p3t">Team</div>
+      <div class="price" data-p="p3p">$349</div>
+      <div class="per" data-p="p3per">/month</div>
       <ul>
-        <li id="plan3-f1">3 users</li>
-        <li id="plan3-f2">Everything in Pro</li>
-        <li id="plan3-f3">User roles + permissions</li>
-        <li id="plan3-f4">Dedicated support</li>
+        <li data-p="p3l1">3 users</li>
+        <li data-p="p3l2">Everything in Pro</li>
+        <li data-p="p3l3">User roles + permissions</li>
+        <li data-p="p3l4">Priority support</li>
       </ul>
-      <a href="#" class="btn btn-outline" id="plan3-btn">Start Trial</a>
+      <a href="#cta" class="btn btn-ghost" data-p="p3btn">Start Trial</a>
     </div>
   </div>
 </section>
 
-<section id="waitlist">
-  <div class="waitlist">
-    <h2 id="wl-title">Get Early Access</h2>
-    <p id="wl-sub">BondAgents is in active development. Join the waiting list to be first in line when we launch.</p>
-    <form onsubmit="submitWaitlist(event)">
-      <input type="email" id="wlEmail" placeholder="you@company.com" required>
-      <button type="submit" class="btn btn-gold" id="wl-btn">Join Waiting List</button>
-    </form>
-    <div class="wl-msg" id="wlMsg"></div>
-  </div>
+<section class="faq" id="faq">
+  <h2 id="faq-title">FAQ</h2>
+  <details>
+    <summary id="faq-q1">What is Headquarters?</summary>
+    <p id="faq-a1">Headquarters is a self-hosted command center for AI coding agents. It lets multiple AI models (Claude, Codex, DeepSeek, and more) coordinate on tasks, share a task board, schedule prompts, and request your approval before taking risky actions.</p>
+  </details>
+  <details>
+    <summary id="faq-q2">How is this different from a single AI coding assistant?</summary>
+    <p id="faq-a2">A single assistant works alone. Headquarters gives you a team: a supervisor agent breaks goals into tasks, specialized agents execute them in parallel, and you approve the results. It's an AI workforce, not a pair programmer.</p>
+  </details>
+  <details>
+    <summary id="faq-q3">Do I need my own AI subscriptions?</summary>
+    <p id="faq-a3">Yes. Headquarters connects to your existing Claude, Codex, or other API keys. You bring the models — we provide the coordination layer.</p>
+  </details>
+  <details>
+    <summary id="faq-q4">Is my data private?</summary>
+    <p id="faq-a4">Completely. Headquarters is self-hosted on your machine. No data ever leaves your infrastructure. Your API keys, task history, and agent conversations stay local.</p>
+  </details>
+  <details>
+    <summary id="faq-q5">How do I get started?</summary>
+    <p id="faq-a5">Join the waitlist below. You'll get early access with a 14-day free trial. Installation takes one command.</p>
+  </details>
+</section>
+
+<section class="cta" id="cta">
+  <h2 id="cta-title">Get early access</h2>
+  <p id="cta-sub">Join the waitlist. First 50 users get a lifetime discount.</p>
+  <form onsubmit="submitCta(event)">
+    <input type="email" id="ctaEmail" placeholder="you@company.com" required>
+    <button type="submit" class="btn btn-gold" id="cta-btn">Join Waitlist</button>
+  </form>
+  <div class="msg" id="ctaMsg"></div>
 </section>
 
 <footer>
-  <p>Headquarters &middot; bondagentshq.com &copy; 2026</p>
+  <p>Headquarters &copy; 2026 · <a href="https://bondagentshq.com">bondagentshq.com</a> · <a href="https://github.com/pentsi/bondagentshq">GitHub</a></p>
 </footer>
 
 <script>
-const L = {
+const T = {
   en: {
-    heroTitle: '<span>Headquarters</span> — Where AI Becomes <span>BondAgents</span>',
-    heroSub: 'A shared command center for your AI agents. They coordinate tasks, ship features, and run your business — while you approve and oversee.',
-    cta: 'Get Early Access',
-    learn: 'How It Works',
-    featuresTitle: 'What Headquarters Does',
-    feat1: 'Multi-Agent Coordination',
-    feat1d: 'Claude, Codex, DeepSeek & more — each BondAgent has a role. They delegate tasks, reserve files, and report completion. No collisions.',
-    feat2: 'Shared Task Board',
-    feat2d: 'One dashboard for all BondAgents. See what\'s in progress, what\'s done, file reservations, and token budgets in real-time.',
-    feat3: 'Human Approval Queue',
-    feat3d: 'BondAgents handle execution. Emails, payments, and publications wait for your approval before going out.',
-    feat4: 'Scheduled Prompts',
-    feat4d: 'BondAgents wake up on schedule. Daily standups, recurring tasks, and token-reset restarts — all automatic.',
-    feat5: 'Goal Tracking',
-    feat5d: 'Set top-level goals in Headquarters. BondAgents create linked tasks. Watch progress bars fill up.',
-    feat6: 'Consensus Channel',
-    feat6d: 'Ask all BondAgents a question. Each responds from its perspective. Attach files. Compare answers side by side.',
-    howTitle: 'How It Works',
-    step1: 'Set a Goal',
-    step1d: 'Tell Headquarters what you want built, analyzed, or managed.',
-    step2: 'BondAgents Take Over',
-    step2d: 'The supervisor BondAgent breaks it into tasks. Specialized BondAgents claim and execute them.',
-    step3: 'You Approve',
-    step3d: 'Review completed work in Headquarters. Approve or send back. Risky actions wait in your approval queue.',
-    step4: 'Ship & Repeat',
-    step4d: 'Watch the goal reach 100%. BondAgents self-schedule continuations. Your business runs 24/7.',
-    wlTitle: 'Get Early Access',
-    wlSub: 'Headquarters is in active development. Join the waiting list to be first in line when we launch.',
-    wlBtn: 'Join Waiting List',
-    wlSuccess: 'You\'re on the list! We\'ll be in touch.',
-    wlError: 'Something went wrong. Try again.',
-    pricingTitle: 'Simple Pricing',
-    pricingSub: 'One installation. Unlimited agents. 14-day free trial.',
-    plan1Name: 'Starter',
-    plan1Price: '$49',
-    plan1Period: '/mo',
-    plan1F1: '1 user',
-    plan1F2: 'Up to 3 agents',
-    plan1F3: 'Shared task board',
-    plan1F4: 'Scheduled prompts',
-    plan1Btn: 'Start Trial',
-    plan2Name: 'Pro',
-    plan2Price: '$149',
-    plan2Period: '/mo',
-    plan2F1: '1 user',
-    plan2F2: 'Unlimited agents',
-    plan2F3: 'Goal tracking + consensus',
-    plan2F4: 'Human approval queue',
-    plan2F5: 'Telegram notifications',
-    plan2F6: 'Priority support',
-    plan2Btn: 'Start Trial',
-    plan3Name: 'Team',
-    plan3Price: '$349',
-    plan3Period: '/mo',
-    plan3F1: '3 users',
-    plan3F2: 'Everything in Pro',
-    plan3F3: 'User roles + permissions',
-    plan3F4: 'Dedicated support',
-    plan3Btn: 'Start Trial'
+    badge: 'Available in beta',
+    heroTitle: '<span class="hl">Headquarters</span> — Where AI<br>Becomes <span class="hl">BondAgents</span>',
+    heroSub: 'A shared command center for your AI agents. They coordinate, ship, and run your business — while you oversee.',
+    heroCta: 'Get Early Access',
+    heroLearn: 'How it works →',
+    navFeatures: 'Features',
+    navHow: 'How it works',
+    navPricing: 'Pricing',
+    featuresTitle: 'Built for agent teamwork',
+    featuresSub: 'Everything your AI workforce needs to ship autonomously.',
+    f: { t:['Multi-Agent Coordination','Shared Task Board','Human Approval Queue','Scheduled Prompts','Goal Tracking','Consensus Channel'],
+      d:['Each agent has a role. They delegate tasks, reserve files, and report completion — with zero collisions.',
+         'One real-time dashboard for every agent. See progress, file locks, and token budgets at a glance.',
+         'Emails, payments, and publications wait for your one-click approval. Agents handle the rest.',
+         'Agents wake on schedule. Daily standups, recurring tasks, and token-reset restarts — fully automatic.',
+         'Set top-level goals. Watch progress bars fill as linked tasks complete. Never lose sight of the big picture.',
+         'Ask every agent a question. Each answers from its perspective. Compare, attach files, decide.']},
+    howTitle: 'How it works',
+    howSub: 'From goal to shipped — in four steps.',
+    s: { t:['Set a Goal','Agents Execute','You Approve','Ship & Repeat'],
+      d:['Tell Headquarters what you want built, analyzed, or managed.',
+         'The supervisor breaks it into tasks. Specialized BondAgents claim and deliver.',
+         'Review completed work. Risky actions queue up for your approval.',
+         'Goals hit 100%. Agents self-schedule. Your business runs 24/7.']},
+    pricingTitle: 'Simple pricing',
+    pricingSub: 'One installation. Unlimited agents. 14-day free trial — no credit card.',
+    p: { t:['Starter','Pro','Team'], p:['$49','$149','$349'], per:['/month','/month','/month'],
+      l:[['1 user','Up to 3 agents','Shared task board','Scheduled prompts'],
+         ['1 user','Unlimited agents','Goal tracking + consensus','Human approval queue','Telegram notifications'],
+         ['3 users','Everything in Pro','User roles + permissions','Priority support']],
+      btn:['Start Trial','Start Trial','Start Trial']},
+    faqTitle: 'FAQ',
+    faq: [
+      {q:'What is Headquarters?', a:'Headquarters is a self-hosted command center for AI coding agents. It lets multiple AI models (Claude, Codex, DeepSeek, and more) coordinate on tasks, share a task board, schedule prompts, and request your approval before taking risky actions.'},
+      {q:'How is this different from a single AI coding assistant?', a:'A single assistant works alone. Headquarters gives you a team: a supervisor agent breaks goals into tasks, specialized agents execute them in parallel, and you approve the results. It\'s an AI workforce, not a pair programmer.'},
+      {q:'Do I need my own AI subscriptions?', a:'Yes. Headquarters connects to your existing Claude, Codex, or other API keys. You bring the models — we provide the coordination layer.'},
+      {q:'Is my data private?', a:'Completely. Headquarters is self-hosted on your machine. No data ever leaves your infrastructure. Your API keys, task history, and agent conversations stay local.'},
+      {q:'How do I get started?', a:'Join the waitlist below. You\'ll get early access with a 14-day free trial. Installation takes one command.'}],
+    ctaTitle: 'Get early access',
+    ctaSub: 'Join the waitlist. First 50 users get a lifetime discount.',
+    ctaBtn: 'Join Waitlist',
+    ctaSuccess: 'You\'re on the list! We\'ll be in touch.',
+    ctaError: 'Something went wrong — try again.',
+    stat1: '4', stat1l: 'AI models supported',
+    stat2: '6', stat2l: 'Agent types',
+    stat3: '0', stat3l: 'Lines of code you write',
+    comment: '# Install Headquarters',
+    curl: 'curl'
   },
   fi: {
-    heroTitle: '<span>Headquarters</span> — Tekoälystä tulee <span>BondAgents</span>',
-    heroSub: 'Yhteinen komentokeskus tekoälyagenteillesi. Ne koordinoivat tehtäviä, toimittavat ominaisuuksia ja pyörittävät yritystäsi — sinä hyväksyt ja valvot.',
-    cta: 'Liity jonoon',
-    learn: 'Miten toimii',
-    featuresTitle: 'Mitä Headquarters tekee',
-    feat1: 'Moniagenttikoordinaatio',
-    feat1d: 'Claude, Codex, DeepSeek ja muut — jokaisella BondAgentilla on rooli. Delegoivat tehtäviä, varaavat tiedostoja ja raportoivat valmistumiset.',
-    feat2: 'Yhteinen tehtävätaulu',
-    feat2d: 'Yksi kojelauta kaikille BondAgenteille. Katso mitä on työn alla, mitä valmistunut, tiedostovaraukset ja token-budjetit reaaliajassa.',
-    feat3: 'Ihmisen hyväksyntäjono',
-    feat3d: 'BondAgentit hoitavat toteutuksen. Sähköpostit, maksut ja julkaisut odottavat hyväksyntääsi ennen lähtöä.',
-    feat4: 'Ajastetut promptit',
-    feat4d: 'BondAgentit heräävät aikataulussa. Päivittäiset katsaukset, toistuvat tehtävät ja token-reset-uudelleenkäynnistykset.',
-    feat5: 'Tavoiteseuranta',
-    feat5d: 'Aseta ylätason tavoitteita Headquartersissa. BondAgentit luovat linkitettyjä tehtäviä. Seuraa edistymäpalkkien täyttymistä.',
-    feat6: 'Konsensus-kanava',
-    feat6d: 'Kysy kaikilta BondAgenteilta. Jokainen vastaa omasta näkökulmastaan. Liitä tiedostoja. Vertaa vastauksia.',
+    badge: 'Saatavilla betana',
+    heroTitle: '<span class="hl">Headquarters</span> — Tekoälystä<br>tulee <span class="hl">BondAgents</span>',
+    heroSub: 'Yhteinen komentokeskus tekoälyagenteillesi. Ne koordinoivat, toimittavat ja pyörittävät yritystäsi — sinä valvot.',
+    heroCta: 'Liity jonoon',
+    heroLearn: 'Miten toimii →',
+    navFeatures: 'Ominaisuudet',
+    navHow: 'Miten toimii',
+    navPricing: 'Hinnoittelu',
+    featuresTitle: 'Rakennettu agenttityöskentelyyn',
+    featuresSub: 'Kaikki mitä tekoälytyövoimasi tarvitsee toimiakseen itsenäisesti.',
+    f: { t:['Moniagenttikoordinaatio','Yhteinen tehtävätaulu','Ihmisen hyväksyntäjono','Ajastetut promptit','Tavoiteseuranta','Konsensus-kanava'],
+      d:['Jokaisella agentilla on rooli. Delegoivat tehtäviä, varaavat tiedostoja ja raportoivat — ilman törmäyksiä.',
+         'Yksi reaaliaikainen kojelauta kaikille agenteille. Näet edistymän, varaukset ja token-budjetit yhdellä silmäyksellä.',
+         'Sähköpostit, maksut ja julkaisut odottavat hyväksyntääsi. Agentit hoitavat toteutuksen.',
+         'Agentit heräävät aikataulussa. Päivittäiset katsaukset, toistuvat tehtävät ja token-resetit — täysin automaattisesti.',
+         'Aseta ylätason tavoitteita. Seuraa edistymäpalkkien täyttymistä linkitettyjen tehtävien valmistuessa.',
+         'Kysy jokaiselta agentilta. Jokainen vastaa omasta näkökulmastaan. Vertaa, liitä tiedostoja, päätä.']},
     howTitle: 'Miten toimii',
-    step1: 'Aseta tavoite',
-    step1d: 'Kerro Headquartersille mitä haluat rakentaa, analysoida tai hallita.',
-    step2: 'BondAgentit ottavat ohjat',
-    step2d: 'Työnohjaaja-BondAgent pilkkoo tavoitteen tehtäviksi. Erikoistuneet BondAgentit ottavat ja toteuttavat.',
-    step3: 'Sinä hyväksyt',
-    step3d: 'Tarkista valmistunut työ Headquartersissa. Hyväksy tai palauta. Riskitoimet odottavat hyväksyntäjonossa.',
-    step4: 'Toimita ja toista',
-    step4d: 'Katso kun tavoite saavuttaa 100 %. BondAgentit ajastavat itselleen jatkoja. Yrityksesi pyörii 24/7.',
-    wlTitle: 'Liity jonoon',
-    wlSub: 'Headquarters on aktiivisessa kehityksessä. Liity jonotuslistalle — saat ensimmäisten joukossa pääsyn kun julkaisemme.',
-    wlBtn: 'Liity jonotuslistalle',
-    wlSuccess: 'Olet listalla! Olemme yhteydessä.',
-    wlError: 'Jotain meni pieleen. Yritä uudelleen.',
+    howSub: 'Tavoitteesta toimitukseen — neljässä askeleessa.',
+    s: { t:['Aseta tavoite','Agentit toteuttavat','Sinä hyväksyt','Toimitus & jatko'],
+      d:['Kerro Headquartersille mitä haluat rakentaa, analysoida tai hallita.',
+         'Työnohjaaja pilkkoo tavoitteen tehtäviksi. Erikoistuneet BondAgentit ottavat ja toimittavat.',
+         'Tarkista valmistunut työ. Riskitoimet odottavat hyväksyntääsi.',
+         'Tavoite saavuttaa 100 %. Agentit ajastavat jatkoja. Yrityksesi pyörii 24/7.']},
     pricingTitle: 'Selkeä hinnoittelu',
-    pricingSub: 'Yksi asennus. Rajattomasti agentteja. 14 päivän ilmainen kokeilu.',
-    plan1Name: 'Starter',
-    plan1Price: '49 €',
-    plan1Period: '/kk',
-    plan1F1: '1 käyttäjä',
-    plan1F2: 'Enintään 3 agenttia',
-    plan1F3: 'Jaettu tehtävätaulu',
-    plan1F4: 'Ajastetut promptit',
-    plan1Btn: 'Aloita kokeilu',
-    plan2Name: 'Pro',
-    plan2Price: '149 €',
-    plan2Period: '/kk',
-    plan2F1: '1 käyttäjä',
-    plan2F2: 'Rajattomasti agentteja',
-    plan2F3: 'Tavoiteseuranta + konsensus',
-    plan2F4: 'Ihmisen hyväksyntäjono',
-    plan2F5: 'Telegram-ilmoitukset',
-    plan2F6: 'Priorisoitu tuki',
-    plan2Btn: 'Aloita kokeilu',
-    plan3Name: 'Team',
-    plan3Price: '349 €',
-    plan3Period: '/kk',
-    plan3F1: '3 käyttäjää',
-    plan3F2: 'Kaikki Pro-ominaisuudet',
-    plan3F3: 'Käyttäjäroolit + oikeudet',
-    plan3F4: 'Oma tukihenkilö',
-    plan3Btn: 'Aloita kokeilu'
+    pricingSub: 'Yksi asennus. Rajattomasti agentteja. 14 päivän ilmainen kokeilu — ei luottokorttia.',
+    p: { t:['Starter','Pro','Team'], p:['49 €','149 €','349 €'], per:['/kk','/kk','/kk'],
+      l:[['1 käyttäjä','Enintään 3 agenttia','Jaettu tehtävätaulu','Ajastetut promptit'],
+         ['1 käyttäjä','Rajattomasti agentteja','Tavoiteseuranta + konsensus','Ihmisen hyväksyntäjono','Telegram-ilmoitukset'],
+         ['3 käyttäjää','Kaikki Pro-ominaisuudet','Käyttäjäroolit + oikeudet','Priorisoitu tuki']],
+      btn:['Aloita kokeilu','Aloita kokeilu','Aloita kokeilu']},
+    faqTitle: 'UKK',
+    faq: [
+      {q:'Mikä Headquarters on?', a:'Headquarters on itseisännöity komentokeskus tekoälyagenteille. Se mahdollistaa usean tekoälymallin (Claude, Codex, DeepSeek ym.) koordinoinnin: tehtävien jaon, yhteisen tehtävätaulun, ajastetut promptit ja ihmisen hyväksynnän riskitoimille.'},
+      {q:'Miten tämä eroaa yhdestä tekoälyavustajasta?', a:'Yksi avustaja toimii yksin. Headquarters antaa sinulle tiimin: työnohjaaja pilkkoo tavoitteet tehtäviksi, erikoistuneet agentit toteuttavat ne rinnakkain, ja sinä hyväksyt tulokset. Kyseessä on tekoälytyövoima, ei pariohjelmoija.'},
+      {q:'Tarvitsenko omia tekoälytilauksia?', a:'Kyllä. Headquarters yhdistyy olemassa oleviin Claude-, Codex- tai muihin API-avaimiisi. Sinä tuot mallit — me tarjoamme koordinaatiokerroksen.'},
+      {q:'Ovatko tietoni turvassa?', a:'Täysin. Headquarters on itseisännöity koneellasi. Mitään dataa ei koskaan poistu infrastruktuuristasi. API-avaimesi, tehtävähistoriasi ja agenttikeskustelusi pysyvät paikallisina.'},
+      {q:'Miten pääsen alkuun?', a:'Liity jonotuslistalle. Saat varhaisen pääsyn 14 päivän ilmaisella kokeilulla. Asennus onnistuu yhdellä komennolla.'}],
+    ctaTitle: 'Liity jonoon',
+    ctaSub: 'Ensimmäiset 50 käyttäjää saavat elinikäisen alennuksen.',
+    ctaBtn: 'Liity jonotuslistalle',
+    ctaSuccess: 'Olet listalla! Olemme yhteydessä.',
+    ctaError: 'Jotain meni pieleen — yritä uudelleen.',
+    stat1: '4', stat1l: 'Tekoälymallia tuettuna',
+    stat2: '6', stat2l: 'Agenttityyppiä',
+    stat3: '0', stat3l: 'Riviä koodia sinulta',
+    comment: '# Asenna Headquarters',
+    curl: 'curl'
   }
 };
 
@@ -293,51 +344,66 @@ let lang = localStorage.getItem('ba_lang') || 'en';
 function setLang(l) {
   lang = l;
   localStorage.setItem('ba_lang', l);
-  document.getElementById('btnEn').classList.toggle('active', l === 'en');
-  document.getElementById('btnFi').classList.toggle('active', l === 'fi');
-  const t = L[l];
+  document.getElementById('btnEn').classList.toggle('active', l==='en');
+  document.getElementById('btnFi').classList.toggle('active', l==='fi');
+  const t = T[l];
+
+  document.getElementById('hero-badge').textContent = t.badge;
   document.getElementById('hero-title').innerHTML = t.heroTitle;
   document.getElementById('hero-sub').textContent = t.heroSub;
-  document.getElementById('cta-btn').textContent = t.cta;
-  document.getElementById('learn-btn').textContent = t.learn;
+  document.getElementById('hero-cta').textContent = t.heroCta;
+  document.getElementById('hero-learn').textContent = t.heroLearn;
+  document.getElementById('nav-features').textContent = t.navFeatures;
+  document.getElementById('nav-how').textContent = t.navHow;
+  document.getElementById('nav-pricing').textContent = t.navPricing;
   document.getElementById('features-title').textContent = t.featuresTitle;
-  document.getElementById('how-title').textContent = t.howTitle;
-  ['feat1','feat2','feat3','feat4','feat5','feat6'].forEach((k,i) => {
-    const card = document.querySelectorAll('.card')[i];
-    card.querySelector('h3').textContent = t[k];
-    card.querySelector('p').textContent = t[k+'d'];
+  document.getElementById('features-sub').textContent = t.featuresSub;
+  document.querySelectorAll('[data-f^="f"]').forEach(el => {
+    const a = el.getAttribute('data-f');
+    const idx = parseInt(a[1])-1;
+    el.textContent = a.endsWith('t') ? t.f.t[idx] : t.f.d[idx];
   });
-  document.getElementById('step1').textContent = t.step1;
-  document.getElementById('step1d').textContent = t.step1d;
-  document.getElementById('step2').textContent = t.step2;
-  document.getElementById('step2d').textContent = t.step2d;
-  document.getElementById('step3').textContent = t.step3;
-  document.getElementById('step3d').textContent = t.step3d;
-  document.getElementById('step4').textContent = t.step4;
-  document.getElementById('step4d').textContent = t.step4d;
-  document.getElementById('wl-title').textContent = t.wlTitle;
-  document.getElementById('wl-sub').textContent = t.wlSub;
-  document.getElementById('wl-btn').textContent = t.wlBtn;
+  document.getElementById('how-title').textContent = t.howTitle;
+  document.getElementById('how-sub').textContent = t.howSub;
+  document.querySelectorAll('[data-s^="s"]').forEach(el => {
+    const a = el.getAttribute('data-s');
+    const idx = parseInt(a[1])-1;
+    el.textContent = a.endsWith('t') ? t.s.t[idx] : t.s.d[idx];
+  });
   document.getElementById('pricing-title').textContent = t.pricingTitle;
   document.getElementById('pricing-sub').textContent = t.pricingSub;
-  ['plan1','plan2','plan3'].forEach(p => {
-    ['Name','Price','Period','Btn'].forEach(k => {
-      document.getElementById(p+'-'+k.toLowerCase()).textContent = t[p+k];
-    });
-    const card = document.getElementById(p+'-name').parentElement;
-    const ul = card.querySelector('ul');
-    const items = ul.querySelectorAll('li');
-    items.forEach((li, i) => {
-      li.textContent = t[p+'F'+(i+1)];
-    });
+  document.querySelectorAll('[data-p^="p"]').forEach(el => {
+    const a = el.getAttribute('data-p');
+    const idx = parseInt(a[1])-1;
+    const tail = a.slice(2);
+    if (tail === 't') el.textContent = t.p.t[idx];
+    else if (tail === 'p') el.textContent = t.p.p[idx];
+    else if (tail === 'per') el.textContent = t.p.per[idx];
+    else if (tail.endsWith('btn')) el.textContent = t.p.btn[idx];
+    else if (tail.startsWith('l')) {
+      const li = parseInt(tail[1])-1;
+      el.textContent = t.p.l[idx][li];
+    }
   });
+  document.getElementById('faq-title').textContent = t.faqTitle;
+  document.querySelectorAll('#faq details').forEach((det, i) => {
+    det.querySelector('summary').textContent = t.faq[i].q;
+    det.querySelector('p').textContent = t.faq[i].a;
+  });
+  document.getElementById('cta-title').textContent = t.ctaTitle;
+  document.getElementById('cta-sub').textContent = t.ctaSub;
+  document.getElementById('cta-btn').textContent = t.ctaBtn;
+  document.getElementById('stat1').textContent = t.stat1;
+  document.getElementById('stat1l').textContent = t.stat1l;
+  document.getElementById('stat2').textContent = t.stat2;
+  document.getElementById('stat2l').textContent = t.stat2l;
+  document.getElementById('stat3').textContent = t.stat3;
+  document.getElementById('stat3l').textContent = t.stat3l;
 }
-function submitWaitlist(e) {
+function submitCta(e) {
   e.preventDefault();
-  const email = document.getElementById('wlEmail').value.trim();
-  if (!email) return;
-  document.getElementById('wlMsg').textContent = L[lang].wlSuccess;
-  document.getElementById('wlEmail').value = '';
+  document.getElementById('ctaMsg').textContent = T[lang].ctaSuccess;
+  document.getElementById('ctaEmail').value = '';
 }
 setLang(lang);
 </script>
