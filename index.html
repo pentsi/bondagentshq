@@ -38,7 +38,16 @@ p { color:var(--dim); margin-bottom:16px; }
 .step { flex:1; min-width:200px; max-width:280px; text-align:center; }
 .step .num { width:48px; height:48px; line-height:48px; border-radius:50%; background:var(--gold); color:var(--bg); font-size:20px; font-weight:700; margin:0 auto 12px; }
 
-.waitlist { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:40px; text-align:center; }
+.pricing { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:24px; max-width:860px; margin:0 auto; }
+.price-card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:32px 24px; text-align:center; position:relative; }
+.price-card.featured { border-color:var(--gold); }
+.price-card.featured::before { content:"Popular"; position:absolute; top:-12px; right:20px; background:var(--gold); color:var(--bg); font-size:12px; font-weight:600; padding:3px 12px; border-radius:10px; }
+.price-card h3 { font-size:20px; margin-bottom:8px; }
+.price-card .amount { font-size:36px; font-weight:700; color:var(--gold); margin-bottom:4px; }
+.price-card .period { color:var(--dim); font-size:14px; margin-bottom:16px; }
+.price-card ul { list-style:none; text-align:left; color:var(--dim); font-size:14px; margin-bottom:20px; }
+.price-card ul li { padding:4px 0; }
+.price-card ul li::before { content:"✓ "; color:var(--gold); }
 .waitlist form { display:flex; gap:12px; max-width:440px; margin:24px auto 0; flex-wrap:wrap; justify-content:center; }
 .waitlist input {
   flex:1; min-width:220px; padding:10px 14px; border-radius:6px;
@@ -93,6 +102,51 @@ footer { text-align:center; padding:40px 20px; color:var(--dim); font-size:14px;
   </div>
 </section>
 
+<section id="pricing">
+  <h2 id="pricing-title" style="text-align:center">Simple Pricing</h2>
+  <p style="text-align:center;color:var(--dim);max-width:500px;margin:0 auto 32px" id="pricing-sub">One installation. Unlimited agents. 14-day free trial.</p>
+  <div class="pricing">
+    <div class="price-card">
+      <h3 id="plan1-name">Starter</h3>
+      <div class="amount" id="plan1-price">$49</div>
+      <div class="period" id="plan1-period">/month</div>
+      <ul>
+        <li id="plan1-f1">1 user</li>
+        <li id="plan1-f2">Up to 3 agents</li>
+        <li id="plan1-f3">Shared task board</li>
+        <li id="plan1-f4">Scheduled prompts</li>
+      </ul>
+      <a href="#" class="btn btn-outline" id="plan1-btn">Start Trial</a>
+    </div>
+    <div class="price-card featured">
+      <h3 id="plan2-name">Pro</h3>
+      <div class="amount" id="plan2-price">$149</div>
+      <div class="period" id="plan2-period">/month</div>
+      <ul>
+        <li id="plan2-f1">1 user</li>
+        <li id="plan2-f2">Unlimited agents</li>
+        <li id="plan2-f3">Goal tracking + consensus</li>
+        <li id="plan2-f4">Human approval queue</li>
+        <li id="plan2-f5">Telegram notifications</li>
+        <li id="plan2-f6">Priority support</li>
+      </ul>
+      <a href="#" class="btn btn-gold" id="plan2-btn">Start Trial</a>
+    </div>
+    <div class="price-card">
+      <h3 id="plan3-name">Team</h3>
+      <div class="amount" id="plan3-price">$349</div>
+      <div class="period" id="plan3-period">/month</div>
+      <ul>
+        <li id="plan3-f1">3 users</li>
+        <li id="plan3-f2">Everything in Pro</li>
+        <li id="plan3-f3">User roles + permissions</li>
+        <li id="plan3-f4">Dedicated support</li>
+      </ul>
+      <a href="#" class="btn btn-outline" id="plan3-btn">Start Trial</a>
+    </div>
+  </div>
+</section>
+
 <section id="waitlist">
   <div class="waitlist">
     <h2 id="wl-title">Get Early Access</h2>
@@ -142,7 +196,35 @@ const L = {
     wlSub: 'Headquarters is in active development. Join the waiting list to be first in line when we launch.',
     wlBtn: 'Join Waiting List',
     wlSuccess: 'You\'re on the list! We\'ll be in touch.',
-    wlError: 'Something went wrong. Try again.'
+    wlError: 'Something went wrong. Try again.',
+    pricingTitle: 'Simple Pricing',
+    pricingSub: 'One installation. Unlimited agents. 14-day free trial.',
+    plan1Name: 'Starter',
+    plan1Price: '$49',
+    plan1Period: '/mo',
+    plan1F1: '1 user',
+    plan1F2: 'Up to 3 agents',
+    plan1F3: 'Shared task board',
+    plan1F4: 'Scheduled prompts',
+    plan1Btn: 'Start Trial',
+    plan2Name: 'Pro',
+    plan2Price: '$149',
+    plan2Period: '/mo',
+    plan2F1: '1 user',
+    plan2F2: 'Unlimited agents',
+    plan2F3: 'Goal tracking + consensus',
+    plan2F4: 'Human approval queue',
+    plan2F5: 'Telegram notifications',
+    plan2F6: 'Priority support',
+    plan2Btn: 'Start Trial',
+    plan3Name: 'Team',
+    plan3Price: '$349',
+    plan3Period: '/mo',
+    plan3F1: '3 users',
+    plan3F2: 'Everything in Pro',
+    plan3F3: 'User roles + permissions',
+    plan3F4: 'Dedicated support',
+    plan3Btn: 'Start Trial'
   },
   fi: {
     heroTitle: '<span>Headquarters</span> — Tekoälystä tulee <span>BondAgents</span>',
@@ -175,7 +257,35 @@ const L = {
     wlSub: 'Headquarters on aktiivisessa kehityksessä. Liity jonotuslistalle — saat ensimmäisten joukossa pääsyn kun julkaisemme.',
     wlBtn: 'Liity jonotuslistalle',
     wlSuccess: 'Olet listalla! Olemme yhteydessä.',
-    wlError: 'Jotain meni pieleen. Yritä uudelleen.'
+    wlError: 'Jotain meni pieleen. Yritä uudelleen.',
+    pricingTitle: 'Selkeä hinnoittelu',
+    pricingSub: 'Yksi asennus. Rajattomasti agentteja. 14 päivän ilmainen kokeilu.',
+    plan1Name: 'Starter',
+    plan1Price: '49 €',
+    plan1Period: '/kk',
+    plan1F1: '1 käyttäjä',
+    plan1F2: 'Enintään 3 agenttia',
+    plan1F3: 'Jaettu tehtävätaulu',
+    plan1F4: 'Ajastetut promptit',
+    plan1Btn: 'Aloita kokeilu',
+    plan2Name: 'Pro',
+    plan2Price: '149 €',
+    plan2Period: '/kk',
+    plan2F1: '1 käyttäjä',
+    plan2F2: 'Rajattomasti agentteja',
+    plan2F3: 'Tavoiteseuranta + konsensus',
+    plan2F4: 'Ihmisen hyväksyntäjono',
+    plan2F5: 'Telegram-ilmoitukset',
+    plan2F6: 'Priorisoitu tuki',
+    plan2Btn: 'Aloita kokeilu',
+    plan3Name: 'Team',
+    plan3Price: '349 €',
+    plan3Period: '/kk',
+    plan3F1: '3 käyttäjää',
+    plan3F2: 'Kaikki Pro-ominaisuudet',
+    plan3F3: 'Käyttäjäroolit + oikeudet',
+    plan3F4: 'Oma tukihenkilö',
+    plan3Btn: 'Aloita kokeilu'
   }
 };
 
@@ -208,6 +318,19 @@ function setLang(l) {
   document.getElementById('wl-title').textContent = t.wlTitle;
   document.getElementById('wl-sub').textContent = t.wlSub;
   document.getElementById('wl-btn').textContent = t.wlBtn;
+  document.getElementById('pricing-title').textContent = t.pricingTitle;
+  document.getElementById('pricing-sub').textContent = t.pricingSub;
+  ['plan1','plan2','plan3'].forEach(p => {
+    ['Name','Price','Period','Btn'].forEach(k => {
+      document.getElementById(p+'-'+k.toLowerCase()).textContent = t[p+k];
+    });
+    const card = document.getElementById(p+'-name').parentElement;
+    const ul = card.querySelector('ul');
+    const items = ul.querySelectorAll('li');
+    items.forEach((li, i) => {
+      li.textContent = t[p+'F'+(i+1)];
+    });
+  });
 }
 function submitWaitlist(e) {
   e.preventDefault();
