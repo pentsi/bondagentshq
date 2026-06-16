@@ -230,22 +230,22 @@ footer a { color:var(--gold); text-decoration:none; }
     <div class="price-card">
       <div class="tier">Pro License</div>
       <div class="price">0.0002 BTC</div>
-      <div class="per">≈ €12.50 · one-time</div>
+      <div class="per"><span id="eurUsd">≈ €12.50 · $13.50</span> · one-time</div>
       <ul>
         <li>Unlimited agents</li>
         <li>All features</li>
         <li>1 year of updates</li>
         <li>Self-hosted</li>
       </ul>
-      <div style="font-size:12px;color:var(--dim);margin-bottom:8px">Send <b>0.0002 BTC</b> — or the equivalent value in any coin below (≈ €12.50)</div>
+      <div style="font-size:12px;color:var(--dim);margin-bottom:2px">Send <b>0.0002 BTC</b></div>
+      <div style="font-size:16px;color:var(--fg);margin-bottom:8px">…or the equivalent value in any coin below (≈ <span id="eqValue">€12.50</span>)<br><span style="font-size:12px;color:var(--dim)">tip: cheaper coins (LTC, DOGE) have far lower fees than BTC</span></div>
       <details style="text-align:left;font-size:12px;color:var(--dim)">
         <summary style="cursor:pointer;color:var(--gold)">Payment addresses</summary>
-        <p style="margin-top:8px"><span style="color:#f7931a">BTC</span> <code style="word-break:break-all">bc1qwcmrv0cxq2qwwvycs705tasnhz0xpg5c9tzf9d</code></p>
-        <p><span style="color:#627eea">ETH</span> <code style="word-break:break-all">0x124Df4D4a29E4765c8C60fFF994324875bb0eF4d</code></p>
-        <p><span style="color:#345d9d">LTC</span> <code style="word-break:break-all">ltc1qkhzk3q2l45uyq8ta0ym6ahj6uc25nr6m5yex8l</code></p>
-        <p><span style="color:#c2a633">DOGE</span> <code style="word-break:break-all">D6tM7bGzyMBNZ9cGJf5CXnimi9ineDKaiH</code></p>
-        <p><span style="color:#ff6b00">XMR</span> <code style="word-break:break-all">89sy9XQZ3LSXVaQQLzmneJKqLjfzHB5FETBUfPHgestWfoEourUhL4UdBaBgBAXoNrTNqjFiy1ABpGjkcsVWm8gbSuoGzAK</code></p>
-        <p><span style="color:#f4b728">ZEC</span> <code style="word-break:break-all">u1e982yvqnc90ljutjcn57zl5d8qy6d5lz9u85a2xpm6wrh98mdjkwrnts84c87ffnfwwhhusj6ayq2k2essgj056e526dekuzkysjcgfu</code></p>
+        <p style="margin-top:8px"><span style="color:#f7931a">BTC</span> <b id="amt-btc">0.0002</b> <code style="word-break:break-all">bc1qwcmrv0cxq2qwwvycs705tasnhz0xpg5c9tzf9d</code></p>
+        <p><span style="color:#627eea">ETH</span> <b id="amt-eth">—</b> <code style="word-break:break-all">0x124Df4D4a29E4765c8C60fFF994324875bb0eF4d</code></p>
+        <p><span style="color:#345d9d">LTC</span> <b id="amt-ltc">—</b> <code style="word-break:break-all">ltc1qkhzk3q2l45uyq8ta0ym6ahj6uc25nr6m5yex8l</code></p>
+        <p><span style="color:#c2a633">DOGE</span> <b id="amt-doge">—</b> <code style="word-break:break-all">D6tM7bGzyMBNZ9cGJf5CXnimi9ineDKaiH</code></p>
+        <p style="color:var(--dim);font-size:11px">Amounts update live from market prices. Send the shown amount (small rounding ok).</p>
       </details>
     </div>
   </div>
@@ -288,7 +288,8 @@ footer a { color:var(--gold); text-decoration:none; }
 <footer>
   <p>Headquarters &copy; 2026 · <a href="https://bondagentshq.com">bondagentshq.com</a></p>
   <p style="margin-top:8px;font-size:12px">
-    <a href="https://buymeacoffee.com/qualialab" style="color:var(--gold)" target="_blank">Buy Me a Coffee</a> &middot;
+    <b style="color:var(--dim)">HQ Tips &amp; Tricks Guide</b> &middot;
+    <a href="https://buymeacoffee.com/qualialab" style="color:var(--gold)" target="_blank">Buy with card</a> &middot;
     <span style="color:#f7931a">BTC</span> <code>bc1qwcmrv0cxq2qwwvycs705tasnhz0xpg5c9tzf9d</code>
     <span style="color:#627eea">ETH</span> <code>0x124Df4D4a29E4765c8C60fFF994324875bb0eF4d</code>
     <span style="color:#345d9d">LTC</span> <code>ltc1qkhzk3q2l45uyq8ta0ym6ahj6uc25nr6m5yex8l</code>
@@ -461,6 +462,27 @@ function submitCta(e) {
   document.getElementById('ctaEmail').value = '';
 }
 setLang(lang);
+</script>
+<script>
+// Elävä hinta (#971): 0.0002 BTC EUR/USD + muiden kolikoiden ekvivalentti.
+(function(){
+  var BTC_AMOUNT = 0.0002;
+  function fmt(n, d){ return Number(n).toLocaleString(undefined,{maximumFractionDigits:d}); }
+  fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,litecoin,dogecoin&vs_currencies=eur,usd")
+    .then(function(r){ return r.json(); })
+    .then(function(p){
+      var btc = p.bitcoin; if(!btc) return;
+      var eur = BTC_AMOUNT * btc.eur, usd = BTC_AMOUNT * btc.usd;
+      var eu = document.getElementById("eurUsd"); if(eu) eu.textContent = "≈ €" + fmt(eur,2) + " · $" + fmt(usd,2);
+      var eq = document.getElementById("eqValue"); if(eq) eq.textContent = "€" + fmt(eur,2) + " / $" + fmt(usd,2);
+      var refEur = eur; // 0.0002 BTC:n arvo EUR:na -> muut samaan arvoon
+      function setAmt(id, price){ var el=document.getElementById(id); if(el && price) el.textContent = fmt(refEur/price, 6); }
+      if(p.ethereum) setAmt("amt-eth", p.ethereum.eur);
+      if(p.litecoin) setAmt("amt-ltc", p.litecoin.eur);
+      if(p.dogecoin) setAmt("amt-doge", p.dogecoin.eur);
+    })
+    .catch(function(){ /* offline: jätä oletusarvot näkyviin */ });
+})();
 </script>
 </body>
 </html>
