@@ -151,10 +151,11 @@
       <details><summary id="q5">How autonomous can the agents be?</summary><p id="a5">Highly autonomous in routine, reversible internal work: they can split goals, delegate, schedule continuations, run checks, and deliver evidence. A human remains responsible for consequential external actions and approvals.</p></details>
     </div></section>
     <!-- HINTA JA OSTOPOLKU
-         Napin href on nyt sähköpostifallback, jotta sivu toimii heti eikä
-         kävijä osu kuolleeseen linkkiin. Kun Stripe Payment Link on luotu
-         Dashboardissa (Tuotteet -> Headquarters early access -> Payment link),
-         korvaa alla oleva href sillä URLilla. Muuta ei tarvita. -->
+         Maksu hoidetaan Lemon Squeezyn kautta (merchant of record: LS tilittaa
+         EU-ALV:n, joten hinta on verollinen). Napin href on toistaiseksi
+         sahkopostifallback, jotta sivu toimii heti eika kavija osu kuolleeseen
+         linkkiin. Kun LS-tuote on julkaistu, korvaa alla oleva href sen
+         checkout-URLilla. Muuta ei tarvita. -->
     <section class="pricing wrap" id="pricing">
       <div class="price-card">
         <span class="price-amount" id="price-amount">15 €</span>
