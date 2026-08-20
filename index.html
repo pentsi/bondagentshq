@@ -81,6 +81,9 @@
     .card .mark { color:var(--warm); font-weight:900; }
     .card h3 { margin:12px 0 8px; font-size:1.05rem; }
     .card p { margin:0; color:var(--muted); font-size:.94rem; }
+    .custom-card { grid-column:1/-1; display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:start; min-height:0; background:linear-gradient(120deg,#fff 0%,#fff7f8 100%); }
+    .custom-card .mark { font-size:1.15rem; }
+    .custom-card h3 { margin:0 0 6px; font-size:1.18rem; }
     .steps { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; counter-reset:step; }
     .step { padding:22px 0; border-top:2px solid var(--accent); }
     .step::before { counter-increment:step; content:"0" counter(step); color:var(--accent); font-weight:800; }
@@ -125,7 +128,7 @@
     footer .wrap { display:flex; justify-content:space-between; gap:20px; }
     footer a { color:var(--accent); }
     @media (max-width:900px) { .hero-grid,.story { grid-template-columns:1fr; } .power-panel { max-width:620px; } }
-    @media (max-width:760px) { .wrap { width:min(100% - 32px,600px); } .nav-inner { min-height:64px; } .nav-links { gap:12px; } .nav-links a:first-child { display:none; } .hero { padding-top:64px; } .signal,.grid,.steps,.boundaries { grid-template-columns:1fr; } .signal div { padding:16px 18px; } .power-panel { padding:24px 20px; } .section { padding:64px 0; } .boundaries { gap:16px; } .closing { margin:64px auto; padding:28px 20px; } footer .wrap { display:block; } footer p + p { margin-top:8px; } }
+    @media (max-width:760px) { .wrap { width:min(100% - 32px,600px); } .nav-inner { min-height:64px; } .nav-links { gap:12px; } .nav-links a:first-child { display:none; } .hero { padding-top:64px; } .signal,.grid,.steps,.boundaries { grid-template-columns:1fr; } .custom-card { grid-column:auto; } .signal div { padding:16px 18px; } .power-panel { padding:24px 20px; } .section { padding:64px 0; } .boundaries { gap:16px; } .closing { margin:64px auto; padding:28px 20px; } footer .wrap { display:block; } footer p + p { margin-top:8px; } }
     @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } * { transition:none !important; } }
   </style>
 </head>
@@ -174,6 +177,7 @@
           <article class="card"><span class="mark">04</span><h3 id="f4t">Shared operational memory</h3><p id="f4d">Carry decisions, evidence, and context forward so the next agent continues from real state instead of rereading everything.</p></article>
           <article class="card"><span class="mark">05</span><h3 id="f5t">Self-correcting review loops</h3><p id="f5d">Require tests and evidence, route work for independent review, and return weak results for correction.</p></article>
           <article class="card"><span class="mark">06</span><h3 id="f6t">99% autonomy, minimal interruption</h3><p id="f6d">Keep routine work moving independently. Ask the person only for the rare decisions that cannot safely be inferred or easily reversed.</p></article>
+          <article class="card custom-card"><span class="mark">07</span><div><h3 id="custom-title">Make Headquarters yours.</h3><p id="custom-copy">The source code is included. Adapt and extend Headquarters freely for your own internal use — yourself or with your AI agents. The licence keeps redistribution and resale separate, so your customised system stays under your control.</p></div></article>
         </div>
       </div>
     </section>
@@ -209,6 +213,7 @@
       <details><summary id="q4">Can different models work together?</summary><p id="a4">Yes, when the corresponding local delivery routes are configured. Headquarters can coordinate work across agent tools and model families, but availability still depends on your installed apps, credentials, and provider limits.</p></details>
       <details><summary id="q5">Does autonomy remove human control?</summary><p id="a5">No — it removes unnecessary interruptions. Headquarters targets 99% autonomous work. A person is needed only for rare, high-impact actions such as moving money, publishing or contacting people externally, accepting agreements, changing access, or irreversibly deleting important data.</p></details>
       <details><summary id="q6">Do I need to be technical?</summary><p id="a6">No. Headquarters was built by a non-developer from a practical need and is designed for anyone who wants more capable AI agents — not just programmers. The interface focuses on goals, tasks, decisions, and results instead of requiring you to manage the underlying machinery.</p></details>
+      <details><summary id="q7">Can I modify and develop Headquarters myself?</summary><p id="a7">Yes. The included source-available licence lets you inspect, modify, and extend Headquarters for your own internal use, including with AI agents acting under your control. It does not grant the right to redistribute, resell, or offer the software as a service to third parties.</p></details>
     </div></section>
     <!-- HINTA JA OSTOPOLKU
          Maksu hoidetaan Lemon Squeezyn kautta (merchant of record: LS tilittaa
@@ -280,6 +285,8 @@
         ['Self-correcting review loops','Require tests and evidence, route work for independent review, and return weak results for correction.'],
         ['99% autonomy, minimal interruption','Keep routine work moving independently. Ask the person only for the rare decisions that cannot safely be inferred or easily reversed.']
       ],
+      customTitle:'Make Headquarters yours.',
+      customCopy:'The source code is included. Adapt and extend Headquarters freely for your own internal use — yourself or with your AI agents. The licence keeps redistribution and resale separate, so your customised system stays under your control.',
       me:'Beyond one prompt at a time',
       mt:'One prompt can start a chain of work.',
       ms:'Headquarters does not bypass model usage limits. It preserves the goal and next step so work can resume after the allowed reset — without needing another human prompt.',
@@ -305,7 +312,8 @@
         ['What does “24+ hours autonomous” mean?','In our own production use, agent workflows have continued for more than 24 hours without an intervening human prompt. Headquarters preserves state and schedules the next step across usage-limit resets; it does not bypass provider limits.'],
         ['Can different models work together?','Yes, when the corresponding local delivery routes are configured. Headquarters can coordinate work across agent tools and model families, but availability still depends on your installed apps, credentials, and provider limits.'],
         ['Does autonomy remove human control?','No — it removes unnecessary interruptions. Headquarters targets 99% autonomous work. A person is needed only for rare, high-impact actions such as moving money, publishing or contacting people externally, accepting agreements, changing access, or irreversibly deleting important data.'],
-        ['Do I need to be technical?','No. Headquarters was built by a non-developer from a practical need and is designed for anyone who wants more capable AI agents — not just programmers. The interface focuses on goals, tasks, decisions, and results instead of requiring you to manage the underlying machinery.']
+        ['Do I need to be technical?','No. Headquarters was built by a non-developer from a practical need and is designed for anyone who wants more capable AI agents — not just programmers. The interface focuses on goals, tasks, decisions, and results instead of requiring you to manage the underlying machinery.'],
+        ['Can I modify and develop Headquarters myself?','Yes. The included source-available licence lets you inspect, modify, and extend Headquarters for your own internal use, including with AI agents acting under your control. It does not grant the right to redistribute, resell, or offer the software as a service to third parties.']
       ],
       cl:'Move beyond one prompt at a time.',
       cc:'Give one agent continuity. Give many agents the power to work as a coordinated, self-correcting team.',
@@ -340,6 +348,8 @@
         ['Itsekorjautuvat tarkistussilmukat','Vaadi testit ja näyttö, ohjaa työ riippumattomaan tarkistukseen ja palauta löysä tulos korjattavaksi.'],
         ['99 % autonomia, mahdollisimman vähän keskeytyksiä','Pidä tavanomainen työ liikkeessä itsenäisesti. Kysy ihmiseltä vain harvoista päätöksistä, joita ei voi turvallisesti päätellä tai helposti perua.']
       ],
+      customTitle:'Tee Headquartersista omasi.',
+      customCopy:'Lähdekoodi kuuluu mukaan. Muokkaa ja kehitä Headquartersia vapaasti omaan sisäiseen käyttöösi — itse tai omilla AI-agenteillasi. Lisenssi erottaa jälleenmyynnin ja edelleenjakelun, joten räätälöity järjestelmäsi pysyy omassa hallinnassasi.',
       me:'Yhtä promptia pidemmälle',
       mt:'Yksi prompti voi käynnistää kokonaisen työketjun.',
       ms:'Headquarters ei kierrä mallien käyttörajoja. Se säilyttää tavoitteen ja seuraavan askeleen, jotta työ voi jatkua sallitun resetin jälkeen ilman uutta ihmisen promptia.',
@@ -365,13 +375,14 @@
         ['Mitä “yli 24 tuntia autonomisesti” tarkoittaa?','Omassa tuotantokäytössämme agenttien työketjut ovat jatkuneet yli 24 tuntia ilman ihmisen välipromptia. Headquarters säilyttää tilan ja ajastaa jatkon käyttörajojen resetointien yli; se ei kierrä palveluntarjoajan rajoja.'],
         ['Voivatko eri mallit työskennellä yhdessä?','Kyllä, kun vastaavat paikalliset toimitusreitit on määritetty. Headquarters voi koordinoida agenttityökaluja ja malliperheitä, mutta saatavuus riippuu asennetuista sovelluksista, tunnuksista ja palveluntarjoajien rajoista.'],
         ['Poistaako autonomia ihmisen kontrollin?','Ei — se poistaa tarpeettomat keskeytykset. Headquartersin tavoitteena on 99 % autonominen työ. Ihmistä tarvitaan vain harvoihin vaikutuksiltaan suuriin toimiin, kuten rahansiirtoihin, julkaisemiseen tai ulkoisiin yhteydenottoihin, sopimusten hyväksymiseen, käyttöoikeuksien muuttamiseen tai tärkeän datan peruuttamattomaan poistamiseen.'],
-        ['Tarvitseeko minun olla tekninen?','Ei. Headquarters syntyi ei-devaajan käytännön tarpeesta ja on tarkoitettu kaikille, jotka haluavat tekoälyagenteistaan kyvykkäämpiä — ei vain ohjelmoijille. Käyttöliittymä keskittyy tavoitteisiin, tehtäviin, päätöksiin ja tuloksiin eikä vaadi taustalla olevan tekniikan hallintaa.']
+        ['Tarvitseeko minun olla tekninen?','Ei. Headquarters syntyi ei-devaajan käytännön tarpeesta ja on tarkoitettu kaikille, jotka haluavat tekoälyagenteistaan kyvykkäämpiä — ei vain ohjelmoijille. Käyttöliittymä keskittyy tavoitteisiin, tehtäviin, päätöksiin ja tuloksiin eikä vaadi taustalla olevan tekniikan hallintaa.'],
+        ['Voinko muokata ja kehittää Headquartersia itse?','Kyllä. Mukana tuleva lähdekoodilisenssi antaa oikeuden tutkia, muokata ja laajentaa Headquartersia omaan sisäiseen käyttöösi, myös hallinnassasi toimivilla AI-agenteilla. Se ei anna oikeutta ohjelmiston edelleenjakeluun, jälleenmyyntiin tai tarjoamiseen palveluna kolmansille osapuolille.']
       ],
       cl:'Siirry yhtä promptia pidemmälle.',
       cc:'Anna yhdelle agentille jatkuvuus. Anna useille agenteille voima toimia koordinoituna, itseään korjaavana tiiminä.',
       cb:'Moninkertaista agenttiesi kyvykkyys'
     });
-    function setLang(lang) { const t=copy[lang]; document.documentElement.lang=lang; localStorage.setItem('hq_lang',lang); document.getElementById('btn-en').setAttribute('aria-pressed',lang==='en'); document.getElementById('btn-fi').setAttribute('aria-pressed',lang==='fi'); const text={ 'hero-eyebrow':t.eyebrow,'hero-sub':t.sub,'hero-cta':t.cta,'hero-learn':t.learn,'ease-note':t.easeNote,'nav-capabilities':t.n1,'nav-model':t.n2,'nav-faq':t.n3,'proof-label':t.proofLabel,'proof-number':t.proofNumber,'proof-copy':t.proofCopy,'proof-note':t.proofNote,'signal-label-one':t.signalLabelOne,'signal-label-two':t.signalLabelTwo,'signal-label-three':t.signalLabelThree,'signal-one':t.s1,'signal-two':t.s2,'signal-three':t.s3,'cap-eyebrow':t.ce,'cap-title':t.ct,'cap-sub':t.cs,'model-eyebrow':t.me,'model-title':t.mt,'model-sub':t.ms,'story-eyebrow':t.storyEyebrow,'story-title':t.storyTitle,'story-copy':t.storyCopy,'story-label':t.storyLabel,'boundary-eyebrow':t.be,'boundary-title':t.bt,'boundary-copy':t.bc,'boundary-lead':t.bl,'faq-eyebrow':t.fe,'faq-title':t.ft,'closing-title':t.cl,'closing-copy':t.cc,'closing-cta':t.cb,'brand-parent':t.bp,'footer-parent':t.fp,'price-amount':t.price,'price-note':t.priceNote,'price-buy':t.buy}; Object.entries(text).forEach(([id,value])=>document.getElementById(id).textContent=value); t.chain.forEach((value,i)=>document.getElementById(`chain-${['one','two','three','four'][i]}`).textContent=value); t.storySteps.forEach((value,i)=>document.getElementById(`story-step-${['one','two','three','four','five'][i]}`).textContent=value); document.getElementById('hero-title').innerHTML=t.title; t.f.forEach((x,i)=>{document.getElementById(`f${i+1}t`).textContent=x[0];document.getElementById(`f${i+1}d`).textContent=x[1]}); t.steps.forEach((x,i)=>{document.getElementById(`s${i+1}t`).textContent=x[0];document.getElementById(`s${i+1}d`).textContent=x[1]}); t.b.forEach((x,i)=>document.getElementById(`b${i+1}`).textContent=x); t.q.forEach((x,i)=>{document.getElementById(`q${i+1}`).textContent=x[0];document.getElementById(`a${i+1}`).textContent=x[1]}); }
+    function setLang(lang) { const t=copy[lang]; document.documentElement.lang=lang; localStorage.setItem('hq_lang',lang); document.getElementById('btn-en').setAttribute('aria-pressed',lang==='en'); document.getElementById('btn-fi').setAttribute('aria-pressed',lang==='fi'); const text={ 'hero-eyebrow':t.eyebrow,'hero-sub':t.sub,'hero-cta':t.cta,'hero-learn':t.learn,'ease-note':t.easeNote,'nav-capabilities':t.n1,'nav-model':t.n2,'nav-faq':t.n3,'proof-label':t.proofLabel,'proof-number':t.proofNumber,'proof-copy':t.proofCopy,'proof-note':t.proofNote,'signal-label-one':t.signalLabelOne,'signal-label-two':t.signalLabelTwo,'signal-label-three':t.signalLabelThree,'signal-one':t.s1,'signal-two':t.s2,'signal-three':t.s3,'cap-eyebrow':t.ce,'cap-title':t.ct,'cap-sub':t.cs,'custom-title':t.customTitle,'custom-copy':t.customCopy,'model-eyebrow':t.me,'model-title':t.mt,'model-sub':t.ms,'story-eyebrow':t.storyEyebrow,'story-title':t.storyTitle,'story-copy':t.storyCopy,'story-label':t.storyLabel,'boundary-eyebrow':t.be,'boundary-title':t.bt,'boundary-copy':t.bc,'boundary-lead':t.bl,'faq-eyebrow':t.fe,'faq-title':t.ft,'closing-title':t.cl,'closing-copy':t.cc,'closing-cta':t.cb,'brand-parent':t.bp,'footer-parent':t.fp,'price-amount':t.price,'price-note':t.priceNote,'price-buy':t.buy}; Object.entries(text).forEach(([id,value])=>document.getElementById(id).textContent=value); t.chain.forEach((value,i)=>document.getElementById(`chain-${['one','two','three','four'][i]}`).textContent=value); t.storySteps.forEach((value,i)=>document.getElementById(`story-step-${['one','two','three','four','five'][i]}`).textContent=value); document.getElementById('hero-title').innerHTML=t.title; t.f.forEach((x,i)=>{document.getElementById(`f${i+1}t`).textContent=x[0];document.getElementById(`f${i+1}d`).textContent=x[1]}); t.steps.forEach((x,i)=>{document.getElementById(`s${i+1}t`).textContent=x[0];document.getElementById(`s${i+1}d`).textContent=x[1]}); t.b.forEach((x,i)=>document.getElementById(`b${i+1}`).textContent=x); t.q.forEach((x,i)=>{document.getElementById(`q${i+1}`).textContent=x[0];document.getElementById(`a${i+1}`).textContent=x[1]}); }
     document.getElementById('btn-en').addEventListener('click',()=>setLang('en')); document.getElementById('btn-fi').addEventListener('click',()=>setLang('fi')); // ?lang=fi voittaa tallennetun valinnan, jotta syntropia.fi:stä tuleva
     // suomenkielinen kävijä laskeutuu suoraan suomeksi.
     const urlLang=new URLSearchParams(location.search).get('lang');
