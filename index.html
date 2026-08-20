@@ -50,6 +50,8 @@
     h1 em { color:var(--accent); font-style:normal; }
     .lede { max-width:670px; margin-bottom:32px; color:var(--muted); font-size:clamp(1.1rem,2vw,1.3rem); }
     .actions { display:flex; flex-wrap:wrap; gap:12px; }
+    .ease-note { display:flex; align-items:center; gap:9px; margin:18px 0 0; color:var(--muted); font-size:.88rem; font-weight:700; }
+    .ease-note::before { content:"✓"; display:grid; place-items:center; width:22px; height:22px; border-radius:50%; background:var(--accent-soft); color:var(--accent); font-size:.78rem; }
     .button { display:inline-flex; align-items:center; justify-content:center; min-height:46px; padding:10px 18px; border:1px solid var(--accent); border-radius:8px; background:var(--accent); color:white; font-weight:750; text-decoration:none; }
     .button:hover { background:#a5122a; }
     .button.secondary { background:transparent; color:var(--accent); }
@@ -146,16 +148,17 @@
           <h1 id="hero-title">Your AI agents can do <em>more</em>.</h1>
           <p class="lede" id="hero-sub">Headquarters gives one agent the continuity to remember, schedule, and resume its own work. When a goal needs more power, it coordinates agents and models into one team that can delegate, review, and keep moving.</p>
           <div class="actions"><a class="button" href="#capabilities" id="hero-cta">Multiply your agents' capabilities</a><a class="button secondary" href="#operating-model" id="hero-learn">See how work continues</a></div>
+          <p class="ease-note" id="ease-note">Built by a non-developer for everyone — no technical background required.</p>
         </div>
         <aside class="power-panel" aria-labelledby="proof-number">
           <div class="proof-label" id="proof-label">Demonstrated in real use</div>
           <strong class="proof-number" id="proof-number">24+ h</strong>
           <p class="proof-copy" id="proof-copy">of autonomous agent work without another human prompt — even when usage limits reset during the chain.</p>
           <div class="chain" aria-label="Autonomous work chain">
-            <div class="chain-step"><b>01</b><span id="chain-one">Keep the goal and shared state</span></div>
-            <div class="chain-step"><b>02</b><span id="chain-two">Schedule and prompt the next step</span></div>
-            <div class="chain-step"><b>03</b><span id="chain-three">Delegate across configured models</span></div>
-            <div class="chain-step"><b>04</b><span id="chain-four">Test, review, and continue</span></div>
+            <div class="chain-step"><b>01</b><span id="chain-one">Agents keep the goal and shared state</span></div>
+            <div class="chain-step"><b>02</b><span id="chain-two">Agents schedule and prompt the next step</span></div>
+            <div class="chain-step"><b>03</b><span id="chain-three">Agents delegate across configured models</span></div>
+            <div class="chain-step"><b>04</b><span id="chain-four">Agents test, review, and continue</span></div>
           </div>
           <p class="proof-note" id="proof-note">Provider usage limits are respected, never bypassed.</p>
         </aside>
@@ -170,7 +173,7 @@
           <article class="card"><span class="mark">03</span><h3 id="f3t">Parallel specialization</h3><p id="f3d">Split a goal into owned tasks so builders, researchers, and reviewers can work at the same time without colliding.</p></article>
           <article class="card"><span class="mark">04</span><h3 id="f4t">Shared operational memory</h3><p id="f4d">Carry decisions, evidence, and context forward so the next agent continues from real state instead of rereading everything.</p></article>
           <article class="card"><span class="mark">05</span><h3 id="f5t">Self-correcting review loops</h3><p id="f5d">Require tests and evidence, route work for independent review, and return weak results for correction.</p></article>
-          <article class="card"><span class="mark">06</span><h3 id="f6t">Human control where it matters</h3><p id="f6d">Let reversible internal work move autonomously while consequential external actions wait at an explicit human gate.</p></article>
+          <article class="card"><span class="mark">06</span><h3 id="f6t">99% autonomy, minimal interruption</h3><p id="f6d">Keep routine work moving independently. Ask the person only for the rare decisions that cannot safely be inferred or easily reversed.</p></article>
         </div>
       </div>
     </section>
@@ -198,13 +201,14 @@
         </aside>
       </div>
     </section>
-    <section class="section alt" id="boundaries"><div class="wrap boundaries"><div><div class="eyebrow" id="boundary-eyebrow">Clear limits are a feature</div><h2 id="boundary-title">Control the environment. Verify the claims.</h2><p id="boundary-copy">Headquarters itself is fully self-hosted on your machine — no Headquarters cloud, accounts, or built-in telemetry. The agent apps and model providers you connect are outside our control, so their own network behavior is worth checking once in your environment.</p></div><aside class="boundary-box"><p id="boundary-lead">A trustworthy operating surface should make room for:</p><ul><li id="b1">your own model and API choices</li><li id="b2">explicit approval before consequential actions</li><li id="b3">auditable task, review, and delivery state</li><li id="b4">honest uncertainty when a workflow has not been verified</li></ul></aside></div></section>
+    <section class="section alt" id="boundaries"><div class="wrap boundaries"><div><div class="eyebrow" id="boundary-eyebrow">Maximum autonomy, minimal interruption</div><h2 id="boundary-title">The target: 99% autonomous work.</h2><p id="boundary-copy">Headquarters is designed to move routine, reversible work forward without asking you at every step. Human attention is reserved for the rare external decisions that truly require authority or are difficult to undo.</p></div><aside class="boundary-box"><p id="boundary-lead">Typical reasons to ask the person:</p><ul><li id="b1">moving money, making a purchase, or accepting financial liability</li><li id="b2">publishing, contacting someone, or committing the organisation externally</li><li id="b3">signing an agreement or changing credentials, permissions, or access</li><li id="b4">irreversibly deleting important data or making another high-impact decision</li></ul></aside></div></section>
     <section class="section" id="faq"><div class="wrap faq"><div class="section-heading"><div class="eyebrow" id="faq-eyebrow">Questions worth asking</div><h2 id="faq-title">FAQ</h2></div>
-      <details><summary id="q1">What is Headquarters?</summary><p id="a1">Headquarters is a local-first capability layer for AI agents. It adds persistent goals, shared memory, schedules, delegation, review evidence, and human approval gates around the agent tools you already use.</p></details>
+      <details><summary id="q1">What is Headquarters?</summary><p id="a1">Headquarters is a local-first capability layer for AI agents. It adds persistent goals, shared memory, schedules, delegation, and review evidence around the agent tools you already use — plus a lightweight safety boundary for the few irreversible decisions that truly need a person.</p></details>
       <details><summary id="q2">How does it make one agent more capable?</summary><p id="a2">An agent can retain its goal, schedule its own continuation, resume from shared state, and verify its work instead of waiting for a person to write the next prompt.</p></details>
       <details><summary id="q3">What does “24+ hours autonomous” mean?</summary><p id="a3">In our own production use, agent workflows have continued for more than 24 hours without an intervening human prompt. Headquarters preserves state and schedules the next step across usage-limit resets; it does not bypass provider limits.</p></details>
       <details><summary id="q4">Can different models work together?</summary><p id="a4">Yes, when the corresponding local delivery routes are configured. Headquarters can coordinate work across agent tools and model families, but availability still depends on your installed apps, credentials, and provider limits.</p></details>
-      <details><summary id="q5">Does autonomy remove human control?</summary><p id="a5">No. Routine, reversible internal work can move with high autonomy, while consequential external actions and approvals remain explicit human decisions.</p></details>
+      <details><summary id="q5">Does autonomy remove human control?</summary><p id="a5">No — it removes unnecessary interruptions. Headquarters targets 99% autonomous work. A person is needed only for rare, high-impact actions such as moving money, publishing or contacting people externally, accepting agreements, changing access, or irreversibly deleting important data.</p></details>
+      <details><summary id="q6">Do I need to be technical?</summary><p id="a6">No. Headquarters was built by a non-developer from a practical need and is designed for anyone who wants more capable AI agents — not just programmers. The interface focuses on goals, tasks, decisions, and results instead of requiring you to manage the underlying machinery.</p></details>
     </div></section>
     <!-- HINTA JA OSTOPOLKU
          Maksu hoidetaan Lemon Squeezyn kautta (merchant of record: LS tilittaa
@@ -253,13 +257,14 @@
       sub:'Headquarters gives one agent the continuity to remember, schedule, and resume its own work. When a goal needs more power, it coordinates agents and models into one team that can delegate, review, and keep moving.',
       cta:"Multiply your agents' capabilities",
       learn:'See how work continues',
+      easeNote:'Built by a non-developer for everyone — no technical background required.',
       signalLabelOne:'24+ hours',
       signalLabelTwo:'One agent, amplified',
       signalLabelThree:'Many agents, one system',
       proofLabel:'Demonstrated in real use',
       proofNumber:'24+ h',
       proofCopy:'of autonomous agent work without another human prompt — even when usage limits reset during the chain.',
-      chain:['Keep the goal and shared state','Schedule and prompt the next step','Delegate across configured models','Test, review, and continue'],
+      chain:['Agents keep the goal and shared state','Agents schedule and prompt the next step','Agents delegate across configured models','Agents test, review, and continue'],
       proofNote:'Provider usage limits are respected, never bypassed.',
       s1:'Demonstrated autonomous work without another human prompt.',
       s2:'Persistent goals, memory, schedules, and self-continuation.',
@@ -273,7 +278,7 @@
         ['Parallel specialization','Split a goal into owned tasks so builders, researchers, and reviewers can work at the same time without colliding.'],
         ['Shared operational memory','Carry decisions, evidence, and context forward so the next agent continues from real state instead of rereading everything.'],
         ['Self-correcting review loops','Require tests and evidence, route work for independent review, and return weak results for correction.'],
-        ['Human control where it matters','Let reversible internal work move autonomously while consequential external actions wait at an explicit human gate.']
+        ['99% autonomy, minimal interruption','Keep routine work moving independently. Ask the person only for the rare decisions that cannot safely be inferred or easily reversed.']
       ],
       me:'Beyond one prompt at a time',
       mt:'One prompt can start a chain of work.',
@@ -289,12 +294,18 @@
       storyCopy:'In our own use, a deputy-lead agent took responsibility for the day. Using Headquarters, it reviewed the active goals, planned the next steps, created tasks, delegated work to other agents, and advanced the objectives autonomously while the human operator was away.',
       storyLabel:'A real day with Headquarters',
       storySteps:['Read the active goals and shared state',"Plan the day's next moves",'Create owned, verifiable tasks','Delegate across agents and models','Verify results and advance the goals'],
+      be:'Maximum autonomy, minimal interruption',
+      bt:'The target: 99% autonomous work.',
+      bc:'Headquarters is designed to move routine, reversible work forward without asking you at every step. Human attention is reserved for the rare external decisions that truly require authority or are difficult to undo.',
+      bl:'Typical reasons to ask the person:',
+      b:['moving money, making a purchase, or accepting financial liability','publishing, contacting someone, or committing the organisation externally','signing an agreement or changing credentials, permissions, or access','irreversibly deleting important data or making another high-impact decision'],
       q:[
-        ['What is Headquarters?','Headquarters is a local-first capability layer for AI agents. It adds persistent goals, shared memory, schedules, delegation, review evidence, and human approval gates around the agent tools you already use.'],
+        ['What is Headquarters?','Headquarters is a local-first capability layer for AI agents. It adds persistent goals, shared memory, schedules, delegation, and review evidence around the agent tools you already use — plus a lightweight safety boundary for the few irreversible decisions that truly need a person.'],
         ['How does it make one agent more capable?','An agent can retain its goal, schedule its own continuation, resume from shared state, and verify its work instead of waiting for a person to write the next prompt.'],
         ['What does “24+ hours autonomous” mean?','In our own production use, agent workflows have continued for more than 24 hours without an intervening human prompt. Headquarters preserves state and schedules the next step across usage-limit resets; it does not bypass provider limits.'],
         ['Can different models work together?','Yes, when the corresponding local delivery routes are configured. Headquarters can coordinate work across agent tools and model families, but availability still depends on your installed apps, credentials, and provider limits.'],
-        ['Does autonomy remove human control?','No. Routine, reversible internal work can move with high autonomy, while consequential external actions and approvals remain explicit human decisions.']
+        ['Does autonomy remove human control?','No — it removes unnecessary interruptions. Headquarters targets 99% autonomous work. A person is needed only for rare, high-impact actions such as moving money, publishing or contacting people externally, accepting agreements, changing access, or irreversibly deleting important data.'],
+        ['Do I need to be technical?','No. Headquarters was built by a non-developer from a practical need and is designed for anyone who wants more capable AI agents — not just programmers. The interface focuses on goals, tasks, decisions, and results instead of requiring you to manage the underlying machinery.']
       ],
       cl:'Move beyond one prompt at a time.',
       cc:'Give one agent continuity. Give many agents the power to work as a coordinated, self-correcting team.',
@@ -306,13 +317,14 @@
       sub:'Headquarters antaa yhdelle agentille jatkuvuuden muistaa, ajastaa ja jatkaa omaa työtään. Kun tavoite vaatii lisää voimaa, se yhdistää agentit ja mallit tiimiksi, joka delegoi, tarkastaa ja jatkaa eteenpäin.',
       cta:'Moninkertaista agenttiesi kyvykkyys',
       learn:'Katso, miten työ jatkuu',
+      easeNote:'Ei-devaajan rakentama kaikille — teknistä taustaa ei tarvita.',
       signalLabelOne:'Yli 24 tuntia',
       signalLabelTwo:'Yksi agentti, vahvistettuna',
       signalLabelThree:'Monta agenttia, yksi järjestelmä',
       proofLabel:'Todennettu todellisessa käytössä',
       proofNumber:'Yli 24 h',
       proofCopy:'autonomista agenttityötä ilman yhtäkään ihmisen välipromptia — vaikka käyttörajat resetoituivat työketjun aikana.',
-      chain:['Säilytä tavoite ja yhteinen tila','Ajasta ja promptaa seuraava askel','Delegoi määritettyjen mallien välillä','Testaa, tarkista ja jatka'],
+      chain:['Agentit säilyttävät tavoitteen ja yhteisen tilan','Agentit ajastavat ja promptaavat seuraavan askeleen','Agentit delegoivat määritettyjen mallien välillä','Agentit testaavat, tarkistavat ja jatkavat'],
       proofNote:'Palveluntarjoajien käyttörajoja noudatetaan, ei kierretä.',
       s1:'Omassa käytössä todennettu ilman yhtäkään ihmisen välipromptia.',
       s2:'Pysyvät tavoitteet, muisti, ajastukset ja omatoiminen jatkaminen.',
@@ -326,7 +338,7 @@
         ['Rinnakkainen erikoistuminen','Pilko tavoite omistetuiksi tehtäviksi, jotta toteuttajat, tutkijat ja tarkastajat voivat työskennellä yhtä aikaa törmäämättä.'],
         ['Yhteinen toimintamuisti','Kuljeta päätökset, näyttö ja konteksti eteenpäin, jotta seuraava agentti jatkaa todellisesta tilasta kaiken uudelleenlukemisen sijaan.'],
         ['Itsekorjautuvat tarkistussilmukat','Vaadi testit ja näyttö, ohjaa työ riippumattomaan tarkistukseen ja palauta löysä tulos korjattavaksi.'],
-        ['Ihmisen kontrolli siellä missä tarvitaan','Anna palautettavan sisäisen työn edetä autonomisesti ja pysäytä vaikutuksiltaan suuret ulkoiset toimet selkeälle ihmisportille.']
+        ['99 % autonomia, mahdollisimman vähän keskeytyksiä','Pidä tavanomainen työ liikkeessä itsenäisesti. Kysy ihmiseltä vain harvoista päätöksistä, joita ei voi turvallisesti päätellä tai helposti perua.']
       ],
       me:'Yhtä promptia pidemmälle',
       mt:'Yksi prompti voi käynnistää kokonaisen työketjun.',
@@ -342,18 +354,24 @@
       storyCopy:'Omassa käytössämme varajohtaja-agentti otti vastuun päivän työstä. Headquartersin avulla se selvitti aktiiviset tavoitteet, suunnitteli seuraavat askeleet, loi tehtävät, delegoi työn muille agenteille ja edisti tavoitteita täysin autonomisesti ihmisen ollessa poissa.',
       storyLabel:'Todellinen päivä Headquartersin kanssa',
       storySteps:['Lue aktiiviset tavoitteet ja yhteinen tila','Suunnittele päivän seuraavat askeleet','Luo omistetut ja varmennettavat tehtävät','Delegoi agenttien ja mallien välillä','Tarkista tulokset ja edistä tavoitteita'],
+      be:'Maksimaalinen autonomia, minimaaliset keskeytykset',
+      bt:'Tavoitteena 99 % autonominen työ.',
+      bc:'Headquarters on suunniteltu viemään tavanomaista ja palautettavaa työtä eteenpäin kysymättä sinulta joka vaiheessa. Ihmistä tarvitaan vain harvoihin ulkoisiin päätöksiin, jotka vaativat valtuutusta tai joita on vaikea perua.',
+      bl:'Tyypillisiä syitä kysyä ihmiseltä:',
+      b:['rahan siirtäminen, ostoksen tekeminen tai taloudellisen vastuun hyväksyminen','julkaiseminen, yhteydenotto tai organisaation sitominen ulospäin','sopimuksen hyväksyminen tai tunnusten, oikeuksien tai pääsyn muuttaminen','tärkeän datan peruuttamaton poistaminen tai muu vaikutuksiltaan suuri päätös'],
       q:[
-        ['Mikä Headquarters on?','Headquarters on paikallinen kyvykkyyskerros tekoälyagenteille. Se lisää käyttämiisi agenttityökaluihin pysyvät tavoitteet, yhteisen muistin, ajastukset, delegoinnin, tarkistusnäytön ja ihmisen hyväksyntäportit.'],
+        ['Mikä Headquarters on?','Headquarters on paikallinen kyvykkyyskerros tekoälyagenteille. Se lisää käyttämiisi agenttityökaluihin pysyvät tavoitteet, yhteisen muistin, ajastukset, delegoinnin ja tarkistusnäytön — sekä kevyen turvarajan niille harvoille peruuttamattomille päätöksille, jotka todella tarvitsevat ihmistä.'],
         ['Miten se tekee yhdestä agentista kyvykkäämmän?','Agentti voi säilyttää tavoitteensa, ajastaa oman jatkonsa, jatkaa yhteisestä tilasta ja varmistaa työnsä sen sijaan, että se odottaisi ihmiseltä seuraavaa promptia.'],
         ['Mitä “yli 24 tuntia autonomisesti” tarkoittaa?','Omassa tuotantokäytössämme agenttien työketjut ovat jatkuneet yli 24 tuntia ilman ihmisen välipromptia. Headquarters säilyttää tilan ja ajastaa jatkon käyttörajojen resetointien yli; se ei kierrä palveluntarjoajan rajoja.'],
         ['Voivatko eri mallit työskennellä yhdessä?','Kyllä, kun vastaavat paikalliset toimitusreitit on määritetty. Headquarters voi koordinoida agenttityökaluja ja malliperheitä, mutta saatavuus riippuu asennetuista sovelluksista, tunnuksista ja palveluntarjoajien rajoista.'],
-        ['Poistaako autonomia ihmisen kontrollin?','Ei. Rutiininomainen ja palautettava sisäinen työ voi edetä korkealla autonomialla, mutta vaikutuksiltaan suuret ulkoiset toimet ja hyväksynnät pysyvät ihmisen päätöksinä.']
+        ['Poistaako autonomia ihmisen kontrollin?','Ei — se poistaa tarpeettomat keskeytykset. Headquartersin tavoitteena on 99 % autonominen työ. Ihmistä tarvitaan vain harvoihin vaikutuksiltaan suuriin toimiin, kuten rahansiirtoihin, julkaisemiseen tai ulkoisiin yhteydenottoihin, sopimusten hyväksymiseen, käyttöoikeuksien muuttamiseen tai tärkeän datan peruuttamattomaan poistamiseen.'],
+        ['Tarvitseeko minun olla tekninen?','Ei. Headquarters syntyi ei-devaajan käytännön tarpeesta ja on tarkoitettu kaikille, jotka haluavat tekoälyagenteistaan kyvykkäämpiä — ei vain ohjelmoijille. Käyttöliittymä keskittyy tavoitteisiin, tehtäviin, päätöksiin ja tuloksiin eikä vaadi taustalla olevan tekniikan hallintaa.']
       ],
       cl:'Siirry yhtä promptia pidemmälle.',
       cc:'Anna yhdelle agentille jatkuvuus. Anna useille agenteille voima toimia koordinoituna, itseään korjaavana tiiminä.',
       cb:'Moninkertaista agenttiesi kyvykkyys'
     });
-    function setLang(lang) { const t=copy[lang]; document.documentElement.lang=lang; localStorage.setItem('hq_lang',lang); document.getElementById('btn-en').setAttribute('aria-pressed',lang==='en'); document.getElementById('btn-fi').setAttribute('aria-pressed',lang==='fi'); const text={ 'hero-eyebrow':t.eyebrow,'hero-sub':t.sub,'hero-cta':t.cta,'hero-learn':t.learn,'nav-capabilities':t.n1,'nav-model':t.n2,'nav-faq':t.n3,'proof-label':t.proofLabel,'proof-number':t.proofNumber,'proof-copy':t.proofCopy,'proof-note':t.proofNote,'signal-label-one':t.signalLabelOne,'signal-label-two':t.signalLabelTwo,'signal-label-three':t.signalLabelThree,'signal-one':t.s1,'signal-two':t.s2,'signal-three':t.s3,'cap-eyebrow':t.ce,'cap-title':t.ct,'cap-sub':t.cs,'model-eyebrow':t.me,'model-title':t.mt,'model-sub':t.ms,'story-eyebrow':t.storyEyebrow,'story-title':t.storyTitle,'story-copy':t.storyCopy,'story-label':t.storyLabel,'boundary-eyebrow':t.be,'boundary-title':t.bt,'boundary-copy':t.bc,'boundary-lead':t.bl,'faq-eyebrow':t.fe,'faq-title':t.ft,'closing-title':t.cl,'closing-copy':t.cc,'closing-cta':t.cb,'brand-parent':t.bp,'footer-parent':t.fp,'price-amount':t.price,'price-note':t.priceNote,'price-buy':t.buy}; Object.entries(text).forEach(([id,value])=>document.getElementById(id).textContent=value); t.chain.forEach((value,i)=>document.getElementById(`chain-${['one','two','three','four'][i]}`).textContent=value); t.storySteps.forEach((value,i)=>document.getElementById(`story-step-${['one','two','three','four','five'][i]}`).textContent=value); document.getElementById('hero-title').innerHTML=t.title; t.f.forEach((x,i)=>{document.getElementById(`f${i+1}t`).textContent=x[0];document.getElementById(`f${i+1}d`).textContent=x[1]}); t.steps.forEach((x,i)=>{document.getElementById(`s${i+1}t`).textContent=x[0];document.getElementById(`s${i+1}d`).textContent=x[1]}); t.b.forEach((x,i)=>document.getElementById(`b${i+1}`).textContent=x); t.q.forEach((x,i)=>{document.getElementById(`q${i+1}`).textContent=x[0];document.getElementById(`a${i+1}`).textContent=x[1]}); }
+    function setLang(lang) { const t=copy[lang]; document.documentElement.lang=lang; localStorage.setItem('hq_lang',lang); document.getElementById('btn-en').setAttribute('aria-pressed',lang==='en'); document.getElementById('btn-fi').setAttribute('aria-pressed',lang==='fi'); const text={ 'hero-eyebrow':t.eyebrow,'hero-sub':t.sub,'hero-cta':t.cta,'hero-learn':t.learn,'ease-note':t.easeNote,'nav-capabilities':t.n1,'nav-model':t.n2,'nav-faq':t.n3,'proof-label':t.proofLabel,'proof-number':t.proofNumber,'proof-copy':t.proofCopy,'proof-note':t.proofNote,'signal-label-one':t.signalLabelOne,'signal-label-two':t.signalLabelTwo,'signal-label-three':t.signalLabelThree,'signal-one':t.s1,'signal-two':t.s2,'signal-three':t.s3,'cap-eyebrow':t.ce,'cap-title':t.ct,'cap-sub':t.cs,'model-eyebrow':t.me,'model-title':t.mt,'model-sub':t.ms,'story-eyebrow':t.storyEyebrow,'story-title':t.storyTitle,'story-copy':t.storyCopy,'story-label':t.storyLabel,'boundary-eyebrow':t.be,'boundary-title':t.bt,'boundary-copy':t.bc,'boundary-lead':t.bl,'faq-eyebrow':t.fe,'faq-title':t.ft,'closing-title':t.cl,'closing-copy':t.cc,'closing-cta':t.cb,'brand-parent':t.bp,'footer-parent':t.fp,'price-amount':t.price,'price-note':t.priceNote,'price-buy':t.buy}; Object.entries(text).forEach(([id,value])=>document.getElementById(id).textContent=value); t.chain.forEach((value,i)=>document.getElementById(`chain-${['one','two','three','four'][i]}`).textContent=value); t.storySteps.forEach((value,i)=>document.getElementById(`story-step-${['one','two','three','four','five'][i]}`).textContent=value); document.getElementById('hero-title').innerHTML=t.title; t.f.forEach((x,i)=>{document.getElementById(`f${i+1}t`).textContent=x[0];document.getElementById(`f${i+1}d`).textContent=x[1]}); t.steps.forEach((x,i)=>{document.getElementById(`s${i+1}t`).textContent=x[0];document.getElementById(`s${i+1}d`).textContent=x[1]}); t.b.forEach((x,i)=>document.getElementById(`b${i+1}`).textContent=x); t.q.forEach((x,i)=>{document.getElementById(`q${i+1}`).textContent=x[0];document.getElementById(`a${i+1}`).textContent=x[1]}); }
     document.getElementById('btn-en').addEventListener('click',()=>setLang('en')); document.getElementById('btn-fi').addEventListener('click',()=>setLang('fi')); // ?lang=fi voittaa tallennetun valinnan, jotta syntropia.fi:stä tuleva
     // suomenkielinen kävijä laskeutuu suoraan suomeksi.
     const urlLang=new URLSearchParams(location.search).get('lang');
