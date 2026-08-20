@@ -84,6 +84,14 @@
     .step::before { counter-increment:step; content:"0" counter(step); color:var(--accent); font-weight:800; }
     .step h3 { margin:20px 0 8px; }
     .step p { margin:0; color:var(--muted); font-size:.94rem; }
+    .story { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr); gap:clamp(32px,6vw,72px); align-items:center; padding:clamp(30px,5vw,58px); border:1px solid #f0c6cb; border-radius:20px; background:linear-gradient(135deg,#fff 0%,#fdf0f2 100%); box-shadow:var(--shadow); }
+    .story-copy { max-width:610px; margin-bottom:0; color:var(--muted); font-size:1.08rem; }
+    .story-flow { padding:26px; border-radius:14px; background:var(--ink); color:white; }
+    .story-label { display:block; margin-bottom:16px; color:#f2aab3; font-size:.72rem; font-weight:850; letter-spacing:.14em; text-transform:uppercase; }
+    .story-flow ol { display:grid; gap:0; margin:0; padding:0; list-style:none; counter-reset:story; }
+    .story-flow li { position:relative; padding:11px 0 11px 42px; color:#f5ecee; font-weight:700; }
+    .story-flow li + li { border-top:1px solid #49363a; }
+    .story-flow li::before { counter-increment:story; content:counter(story); position:absolute; left:0; top:10px; display:grid; place-items:center; width:26px; height:26px; border-radius:7px; background:var(--accent); font-size:.76rem; }
     .boundaries { display:grid; grid-template-columns:1.1fr .9fr; gap:28px; align-items:start; }
     .boundary-box { padding:28px; border-radius:14px; background:var(--ink); color:white; box-shadow:var(--shadow); }
     .boundary-box p { color:#e8d9dc; }
@@ -114,7 +122,7 @@
     footer { padding:28px 0 42px; border-top:1px solid var(--line); color:var(--muted); font-size:.85rem; }
     footer .wrap { display:flex; justify-content:space-between; gap:20px; }
     footer a { color:var(--accent); }
-    @media (max-width:900px) { .hero-grid { grid-template-columns:1fr; } .power-panel { max-width:620px; } }
+    @media (max-width:900px) { .hero-grid,.story { grid-template-columns:1fr; } .power-panel { max-width:620px; } }
     @media (max-width:760px) { .wrap { width:min(100% - 32px,600px); } .nav-inner { min-height:64px; } .nav-links { gap:12px; } .nav-links a:first-child { display:none; } .hero { padding-top:64px; } .signal,.grid,.steps,.boundaries { grid-template-columns:1fr; } .signal div { padding:16px 18px; } .power-panel { padding:24px 20px; } .section { padding:64px 0; } .boundaries { gap:16px; } .closing { margin:64px auto; padding:28px 20px; } footer .wrap { display:block; } footer p + p { margin-top:8px; } }
     @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } * { transition:none !important; } }
   </style>
@@ -152,13 +160,13 @@
           <p class="proof-note" id="proof-note">Provider usage limits are respected, never bypassed.</p>
         </aside>
       </div>
-      <div class="signal" aria-label="What Headquarters makes possible"><div><strong id="signal-label-one">24+ hours</strong><span id="signal-one">Demonstrated autonomous work without another human prompt.</span></div><div><strong id="signal-label-two">One agent, amplified</strong><span id="signal-two">Persistent goals, memory, schedules, and self-continuation.</span></div><div><strong id="signal-label-three">Many agents, one system</strong><span id="signal-three">Delegate across configured models and combine their strengths.</span></div></div>
+      <div class="signal" aria-label="What Headquarters makes possible"><div><strong id="signal-label-one">24+ hours</strong><span id="signal-one">Demonstrated autonomous work without another human prompt.</span></div><div><strong id="signal-label-two">One agent, amplified</strong><span id="signal-two">Persistent goals, memory, schedules, and self-continuation.</span></div><div><strong id="signal-label-three">Many agents, one system</strong><span id="signal-three">Delegate across Claude, Codex, and any other configured agent routes.</span></div></div>
     </section>
     <section class="section alt" id="capabilities">
       <div class="wrap"><div class="section-heading"><div class="eyebrow" id="cap-eyebrow">Capability, compounded</div><h2 id="cap-title">More power for one agent. More power together.</h2><p id="cap-sub">Headquarters turns a single prompt into a persistent, coordinated chain of work.</p></div>
         <div class="grid">
           <article class="card"><span class="mark">01</span><h3 id="f1t">Persistent execution</h3><p id="f1d">Keep the goal, state, and next step alive across scheduled wake-ups instead of starting over in every chat.</p></article>
-          <article class="card"><span class="mark">02</span><h3 id="f2t">Cross-model delegation</h3><p id="f2d">Let an agent route work to other configured agents and model families, then bring the results back into one workflow.</p></article>
+          <article class="card"><span class="mark">02</span><h3 id="f2t">Cross-model delegation</h3><p id="f2d">Let an agent route work across Claude, Codex, and any other configured agent routes, then bring the results back into one workflow.</p></article>
           <article class="card"><span class="mark">03</span><h3 id="f3t">Parallel specialization</h3><p id="f3d">Split a goal into owned tasks so builders, researchers, and reviewers can work at the same time without colliding.</p></article>
           <article class="card"><span class="mark">04</span><h3 id="f4t">Shared operational memory</h3><p id="f4d">Carry decisions, evidence, and context forward so the next agent continues from real state instead of rereading everything.</p></article>
           <article class="card"><span class="mark">05</span><h3 id="f5t">Self-correcting review loops</h3><p id="f5d">Require tests and evidence, route work for independent review, and return weak results for correction.</p></article>
@@ -169,6 +177,25 @@
     <section class="section" id="operating-model">
       <div class="wrap"><div class="section-heading"><div class="eyebrow" id="model-eyebrow">Beyond one prompt at a time</div><h2 id="model-title">One prompt can start a chain of work.</h2><p id="model-sub">Headquarters does not bypass model usage limits. It preserves the goal and next step so work can resume after the allowed reset — without needing another human prompt.</p></div>
         <div class="steps"><article class="step"><h3 id="s1t">Set the outcome</h3><p id="s1d">Give the agent a real goal, boundaries, and the context it needs.</p></article><article class="step"><h3 id="s2t">Continue autonomously</h3><p id="s2d">The agent plans, executes, schedules its next wake-up, and resumes from shared state.</p></article><article class="step"><h3 id="s3t">Expand across agents</h3><p id="s3d">When useful, it delegates parallel or specialist work to other configured models.</p></article><article class="step"><h3 id="s4t">Verify and advance</h3><p id="s4d">Tests, delivery evidence, reviews, and human gates decide what happens next.</p></article></div>
+      </div>
+    </section>
+    <section class="section" id="deputy-lead">
+      <div class="wrap story">
+        <div>
+          <div class="eyebrow" id="story-eyebrow">Operational autonomy, demonstrated</div>
+          <h2 id="story-title">Take the day off. Your goals don't have to.</h2>
+          <p class="story-copy" id="story-copy">In our own use, a deputy-lead agent took responsibility for the day. Using Headquarters, it reviewed the active goals, planned the next steps, created tasks, delegated work to other agents, and advanced the objectives autonomously while the human operator was away.</p>
+        </div>
+        <aside class="story-flow">
+          <span class="story-label" id="story-label">A real day with Headquarters</span>
+          <ol>
+            <li id="story-step-one">Read the active goals and shared state</li>
+            <li id="story-step-two">Plan the day's next moves</li>
+            <li id="story-step-three">Create owned, verifiable tasks</li>
+            <li id="story-step-four">Delegate across agents and models</li>
+            <li id="story-step-five">Verify results and advance the goals</li>
+          </ol>
+        </aside>
       </div>
     </section>
     <section class="section alt" id="boundaries"><div class="wrap boundaries"><div><div class="eyebrow" id="boundary-eyebrow">Clear limits are a feature</div><h2 id="boundary-title">Control the environment. Verify the claims.</h2><p id="boundary-copy">Headquarters itself is fully self-hosted on your machine — no Headquarters cloud, accounts, or built-in telemetry. The agent apps and model providers you connect are outside our control, so their own network behavior is worth checking once in your environment.</p></div><aside class="boundary-box"><p id="boundary-lead">A trustworthy operating surface should make room for:</p><ul><li id="b1">your own model and API choices</li><li id="b2">explicit approval before consequential actions</li><li id="b3">auditable task, review, and delivery state</li><li id="b4">honest uncertainty when a workflow has not been verified</li></ul></aside></div></section>
@@ -236,13 +263,13 @@
       proofNote:'Provider usage limits are respected, never bypassed.',
       s1:'Demonstrated autonomous work without another human prompt.',
       s2:'Persistent goals, memory, schedules, and self-continuation.',
-      s3:'Delegate across configured models and combine their strengths.',
+      s3:'Delegate across Claude, Codex, and any other configured agent routes.',
       ce:'Capability, compounded',
       ct:'More power for one agent. More power together.',
       cs:'Headquarters turns a single prompt into a persistent, coordinated chain of work.',
       f:[
         ['Persistent execution','Keep the goal, state, and next step alive across scheduled wake-ups instead of starting over in every chat.'],
-        ['Cross-model delegation','Let an agent route work to other configured agents and model families, then bring the results back into one workflow.'],
+        ['Cross-model delegation','Let an agent route work across Claude, Codex, and any other configured agent routes, then bring the results back into one workflow.'],
         ['Parallel specialization','Split a goal into owned tasks so builders, researchers, and reviewers can work at the same time without colliding.'],
         ['Shared operational memory','Carry decisions, evidence, and context forward so the next agent continues from real state instead of rereading everything.'],
         ['Self-correcting review loops','Require tests and evidence, route work for independent review, and return weak results for correction.'],
@@ -257,6 +284,11 @@
         ['Expand across agents','When useful, it delegates parallel or specialist work to other configured models.'],
         ['Verify and advance','Tests, delivery evidence, reviews, and human gates decide what happens next.']
       ],
+      storyEyebrow:'Operational autonomy, demonstrated',
+      storyTitle:"Take the day off. Your goals don't have to.",
+      storyCopy:'In our own use, a deputy-lead agent took responsibility for the day. Using Headquarters, it reviewed the active goals, planned the next steps, created tasks, delegated work to other agents, and advanced the objectives autonomously while the human operator was away.',
+      storyLabel:'A real day with Headquarters',
+      storySteps:['Read the active goals and shared state',"Plan the day's next moves",'Create owned, verifiable tasks','Delegate across agents and models','Verify results and advance the goals'],
       q:[
         ['What is Headquarters?','Headquarters is a local-first capability layer for AI agents. It adds persistent goals, shared memory, schedules, delegation, review evidence, and human approval gates around the agent tools you already use.'],
         ['How does it make one agent more capable?','An agent can retain its goal, schedule its own continuation, resume from shared state, and verify its work instead of waiting for a person to write the next prompt.'],
@@ -284,13 +316,13 @@
       proofNote:'Palveluntarjoajien käyttörajoja noudatetaan, ei kierretä.',
       s1:'Omassa käytössä todennettu ilman yhtäkään ihmisen välipromptia.',
       s2:'Pysyvät tavoitteet, muisti, ajastukset ja omatoiminen jatkaminen.',
-      s3:'Delegoi määritettyjen mallien välillä ja yhdistä niiden vahvuudet.',
+      s3:'Delegoi Clauden, Codexin ja kaikkien muiden määritettyjen agenttireittien välillä.',
       ce:'Kertaantuva kyvykkyys',
       ct:'Enemmän voimaa yhdelle agentille. Enemmän voimaa yhdessä.',
       cs:'Headquarters muuttaa yhden promptin jatkuvaksi, koordinoiduksi työketjuksi.',
       f:[
         ['Jatkuva toteutus','Säilytä tavoite, tila ja seuraava askel ajastettujen herätysten yli sen sijaan, että jokainen keskustelu alkaisi alusta.'],
-        ['Mallien välinen delegointi','Anna agentin reitittää työtä muille määritetyille agenteille ja malliperheille ja tuoda tulokset takaisin samaan työnkulkuun.'],
+        ['Mallien välinen delegointi','Anna agentin reitittää työtä Clauden, Codexin ja kaikkien muiden määritettyjen agenttireittien välillä ja tuoda tulokset takaisin samaan työnkulkuun.'],
         ['Rinnakkainen erikoistuminen','Pilko tavoite omistetuiksi tehtäviksi, jotta toteuttajat, tutkijat ja tarkastajat voivat työskennellä yhtä aikaa törmäämättä.'],
         ['Yhteinen toimintamuisti','Kuljeta päätökset, näyttö ja konteksti eteenpäin, jotta seuraava agentti jatkaa todellisesta tilasta kaiken uudelleenlukemisen sijaan.'],
         ['Itsekorjautuvat tarkistussilmukat','Vaadi testit ja näyttö, ohjaa työ riippumattomaan tarkistukseen ja palauta löysä tulos korjattavaksi.'],
@@ -305,6 +337,11 @@
         ['Laajenna agenttien välillä','Tarvittaessa agentti delegoi rinnakkaista tai erikoistunutta työtä muille määritetyille malleille.'],
         ['Varmista ja etene','Testit, toimitusnäyttö, tarkistukset ja ihmisportit ratkaisevat seuraavan askeleen.']
       ],
+      storyEyebrow:'Todennettua operatiivista autonomiaa',
+      storyTitle:'Pidä vapaapäivä. Tavoitteiden ei tarvitse pysähtyä.',
+      storyCopy:'Omassa käytössämme varajohtaja-agentti otti vastuun päivän työstä. Headquartersin avulla se selvitti aktiiviset tavoitteet, suunnitteli seuraavat askeleet, loi tehtävät, delegoi työn muille agenteille ja edisti tavoitteita täysin autonomisesti ihmisen ollessa poissa.',
+      storyLabel:'Todellinen päivä Headquartersin kanssa',
+      storySteps:['Lue aktiiviset tavoitteet ja yhteinen tila','Suunnittele päivän seuraavat askeleet','Luo omistetut ja varmennettavat tehtävät','Delegoi agenttien ja mallien välillä','Tarkista tulokset ja edistä tavoitteita'],
       q:[
         ['Mikä Headquarters on?','Headquarters on paikallinen kyvykkyyskerros tekoälyagenteille. Se lisää käyttämiisi agenttityökaluihin pysyvät tavoitteet, yhteisen muistin, ajastukset, delegoinnin, tarkistusnäytön ja ihmisen hyväksyntäportit.'],
         ['Miten se tekee yhdestä agentista kyvykkäämmän?','Agentti voi säilyttää tavoitteensa, ajastaa oman jatkonsa, jatkaa yhteisestä tilasta ja varmistaa työnsä sen sijaan, että se odottaisi ihmiseltä seuraavaa promptia.'],
@@ -316,7 +353,7 @@
       cc:'Anna yhdelle agentille jatkuvuus. Anna useille agenteille voima toimia koordinoituna, itseään korjaavana tiiminä.',
       cb:'Moninkertaista agenttiesi kyvykkyys'
     });
-    function setLang(lang) { const t=copy[lang]; document.documentElement.lang=lang; localStorage.setItem('hq_lang',lang); document.getElementById('btn-en').setAttribute('aria-pressed',lang==='en'); document.getElementById('btn-fi').setAttribute('aria-pressed',lang==='fi'); const text={ 'hero-eyebrow':t.eyebrow,'hero-sub':t.sub,'hero-cta':t.cta,'hero-learn':t.learn,'nav-capabilities':t.n1,'nav-model':t.n2,'nav-faq':t.n3,'proof-label':t.proofLabel,'proof-number':t.proofNumber,'proof-copy':t.proofCopy,'proof-note':t.proofNote,'signal-label-one':t.signalLabelOne,'signal-label-two':t.signalLabelTwo,'signal-label-three':t.signalLabelThree,'signal-one':t.s1,'signal-two':t.s2,'signal-three':t.s3,'cap-eyebrow':t.ce,'cap-title':t.ct,'cap-sub':t.cs,'model-eyebrow':t.me,'model-title':t.mt,'model-sub':t.ms,'boundary-eyebrow':t.be,'boundary-title':t.bt,'boundary-copy':t.bc,'boundary-lead':t.bl,'faq-eyebrow':t.fe,'faq-title':t.ft,'closing-title':t.cl,'closing-copy':t.cc,'closing-cta':t.cb,'brand-parent':t.bp,'footer-parent':t.fp,'price-amount':t.price,'price-note':t.priceNote,'price-buy':t.buy}; Object.entries(text).forEach(([id,value])=>document.getElementById(id).textContent=value); t.chain.forEach((value,i)=>document.getElementById(`chain-${['one','two','three','four'][i]}`).textContent=value); document.getElementById('hero-title').innerHTML=t.title; t.f.forEach((x,i)=>{document.getElementById(`f${i+1}t`).textContent=x[0];document.getElementById(`f${i+1}d`).textContent=x[1]}); t.steps.forEach((x,i)=>{document.getElementById(`s${i+1}t`).textContent=x[0];document.getElementById(`s${i+1}d`).textContent=x[1]}); t.b.forEach((x,i)=>document.getElementById(`b${i+1}`).textContent=x); t.q.forEach((x,i)=>{document.getElementById(`q${i+1}`).textContent=x[0];document.getElementById(`a${i+1}`).textContent=x[1]}); }
+    function setLang(lang) { const t=copy[lang]; document.documentElement.lang=lang; localStorage.setItem('hq_lang',lang); document.getElementById('btn-en').setAttribute('aria-pressed',lang==='en'); document.getElementById('btn-fi').setAttribute('aria-pressed',lang==='fi'); const text={ 'hero-eyebrow':t.eyebrow,'hero-sub':t.sub,'hero-cta':t.cta,'hero-learn':t.learn,'nav-capabilities':t.n1,'nav-model':t.n2,'nav-faq':t.n3,'proof-label':t.proofLabel,'proof-number':t.proofNumber,'proof-copy':t.proofCopy,'proof-note':t.proofNote,'signal-label-one':t.signalLabelOne,'signal-label-two':t.signalLabelTwo,'signal-label-three':t.signalLabelThree,'signal-one':t.s1,'signal-two':t.s2,'signal-three':t.s3,'cap-eyebrow':t.ce,'cap-title':t.ct,'cap-sub':t.cs,'model-eyebrow':t.me,'model-title':t.mt,'model-sub':t.ms,'story-eyebrow':t.storyEyebrow,'story-title':t.storyTitle,'story-copy':t.storyCopy,'story-label':t.storyLabel,'boundary-eyebrow':t.be,'boundary-title':t.bt,'boundary-copy':t.bc,'boundary-lead':t.bl,'faq-eyebrow':t.fe,'faq-title':t.ft,'closing-title':t.cl,'closing-copy':t.cc,'closing-cta':t.cb,'brand-parent':t.bp,'footer-parent':t.fp,'price-amount':t.price,'price-note':t.priceNote,'price-buy':t.buy}; Object.entries(text).forEach(([id,value])=>document.getElementById(id).textContent=value); t.chain.forEach((value,i)=>document.getElementById(`chain-${['one','two','three','four'][i]}`).textContent=value); t.storySteps.forEach((value,i)=>document.getElementById(`story-step-${['one','two','three','four','five'][i]}`).textContent=value); document.getElementById('hero-title').innerHTML=t.title; t.f.forEach((x,i)=>{document.getElementById(`f${i+1}t`).textContent=x[0];document.getElementById(`f${i+1}d`).textContent=x[1]}); t.steps.forEach((x,i)=>{document.getElementById(`s${i+1}t`).textContent=x[0];document.getElementById(`s${i+1}d`).textContent=x[1]}); t.b.forEach((x,i)=>document.getElementById(`b${i+1}`).textContent=x); t.q.forEach((x,i)=>{document.getElementById(`q${i+1}`).textContent=x[0];document.getElementById(`a${i+1}`).textContent=x[1]}); }
     document.getElementById('btn-en').addEventListener('click',()=>setLang('en')); document.getElementById('btn-fi').addEventListener('click',()=>setLang('fi')); // ?lang=fi voittaa tallennetun valinnan, jotta syntropia.fi:stä tuleva
     // suomenkielinen kävijä laskeutuu suoraan suomeksi.
     const urlLang=new URLSearchParams(location.search).get('lang');
